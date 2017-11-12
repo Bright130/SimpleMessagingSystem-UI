@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.SignupController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -24,19 +24,19 @@
       <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
       <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
 
-         </rowConstraints>
+
+   </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
          <font>
             <Font name="Arial" size="37.0" />
-         </font>
-      </Text>
+         </font></Text>
       <Label text="Username" GridPane.rowIndex="2" />
       <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Password" GridPane.rowIndex="3" />
       <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="login" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkLogin" prefWidth="51.0" text="Login" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goSignupView" prefHeight="7.0" prefWidth="53.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="login" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goLoginView" prefWidth="213.0" text="Back" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkSignup" prefHeight="7.0" prefWidth="53.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <Label fx:id="error" prefHeight="10.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>
