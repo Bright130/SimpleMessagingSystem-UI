@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.TextFlow?>
 
-<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.SignupController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
-      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
-      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
-      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
-      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
-      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" />
-
-
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Arial" size="37.0" />
-         </font></Text>
-      <Label text="Username" GridPane.rowIndex="2" />
-      <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Password" GridPane.rowIndex="3" />
-      <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="login" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goLoginView" prefWidth="213.0" text="Back" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkSignup" prefHeight="7.0" prefWidth="53.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Label fx:id="error" prefHeight="10.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <SplitPane dividerPositions="0.35319148936170214" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="707.0" GridPane.columnIndex="1">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="225.0">
+               <children>
+                  <TabPane prefHeight="487.0" prefWidth="246.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="all" text="ALL">
+                        <content>
+                          <AnchorPane fx:id="allPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                      <Tab fx:id="unread" text="Unread">
+                        <content>
+                          <AnchorPane fx:id="unreadPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab fx:id="read" text="Read">
+                           <content>
+                              <AnchorPane fx:id="readPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab fx:id="sent" text="Sent">
+                           <content>
+                              <AnchorPane fx:id="sentPane" minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="231.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="453.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="31.0" stroke="TRANSPARENT" strokeType="INSIDE" width="453.0" />
+                  <HBox prefHeight="31.0" prefWidth="75.0">
+                     <children>
+                        <Button fx:id="refresh" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" text="Refresh" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="133.0" prefHeight="31.0" prefWidth="186.0">
+                     <children>
+                        <Button fx:id="newMessage" mnemonicParsing="false" prefHeight="38.0" prefWidth="52.0" text="New" />
+                        <Button fx:id="reply" mnemonicParsing="false" prefHeight="38.0" prefWidth="52.0" text="Reply" />
+                        <Button fx:id="forward" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" text="Forward" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" layoutX="352.0" layoutY="1.0" prefHeight="31.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="logout" mnemonicParsing="false" prefHeight="29.0" prefWidth="91.0" text="Logout" />
+                     </children>
+                  </HBox>
+                  <TextFlow fx:id="detailPane" layoutY="31.0" prefHeight="454.0" prefWidth="453.0" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </GridPane>
