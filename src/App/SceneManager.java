@@ -7,6 +7,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -29,8 +30,9 @@ import javafx.scene.Parent;
 
 public class SceneManager extends Application{
     public void start(Stage primaryStage) throws Exception {}
-    private Parent root ;
-    private void loginView()
+    private StackPane root =new StackPane();
+    private GridPane pane = null;
+    public void loginView()
     {
         try{
             LoginController login = (LoginController) changeScene("Login.fxml") ;
@@ -43,14 +45,39 @@ public class SceneManager extends Application{
 
     }
 
+    public void signupView()
+    {
+        try{
+            SignupController signup = (SignupController) changeScene("Signup.fxml") ;
+            signup.setWindow(this);
+            System.out.println("dfsfsgehth");
+
+        }catch (Exception e)
+        {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
     public Parent createWindow()
     {
-       loginView();
-
+        loginView();
         return root;
     }
 
     public boolean checkLogin(String username, String password)
+    {
+        if(1==1)
+        {
+
+            return true ;
+        }
+        else
+
+            return false;
+    }
+
+    public boolean checkSignup(String username, String password)
     {
         if(1==0)
         {
@@ -63,18 +90,22 @@ public class SceneManager extends Application{
     }
 
     public Initializable changeScene(String filename) throws Exception{
-          String path = ".."+ File.separator+"FXML"+ File.separator+filename ;
+
+        String path = ".."+ File.separator+"FXML"+ File.separator+filename ;
         InputStream file = getClass().getResourceAsStream(path);
         FXMLLoader loader = new FXMLLoader();
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(getClass().getResource(path));
-        Parent pane = null;
+        if(pane!=null)
+            root.getChildren().removeAll(pane);
+        System.out.println("path = " + path);
         try{
             pane = loader.load(file);
         }finally {
             file.close();
         }
-        root = pane;
+
+        root.getChildren().addAll(pane);
         return (Initializable) loader.getController();
 
     }

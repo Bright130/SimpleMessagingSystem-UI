@@ -23,13 +23,11 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends Parent implements Initializable {
+public class SignupController extends Parent implements Initializable {
     @FXML
     TextField username;
     @FXML
     PasswordField password;
-    @FXML
-    Button login;
     @FXML
     Button signup;
     @FXML
@@ -48,16 +46,15 @@ public class LoginController extends Parent implements Initializable {
         password.setPromptText("Password");
     }
 
-    public void checkLogin(ActionEvent event){
+    public void checkSignup(ActionEvent event){
 
-        if(!application.checkLogin(username.getText(),password.getText())){
-            error.setText("Invalid Id/Pass");
+        if(!application.checkSignup(username.getText(),password.getText())){
+            error.setText("Someone already used this username");
         }
     }
 
+    public void goLoginView(ActionEvent event){
 
-    public void goSignupView(ActionEvent event){
-
-        application.signupView();
+        application.loginView();
     }
 }
