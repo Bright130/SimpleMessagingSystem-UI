@@ -35,6 +35,8 @@ public class SignupController extends Parent implements Initializable {
 
     private SceneManager application;
 
+    private Account account;
+
     public void setWindow(SceneManager application)
     {
         this.application = application ;
@@ -46,10 +48,33 @@ public class SignupController extends Parent implements Initializable {
         password.setPromptText("Password");
     }
 
-    public void checkSignup(ActionEvent event){
-
-        if(!application.checkSignup(username.getText(),password.getText())){
-            error.setText("Someone already used this username");
+    public void checkSignup(ActionEvent event)
+    {
+        String email = username.getText();
+        String pass = password.getText();
+        if(IOUtils.checkEmail(email))
+        {
+            if(IOUtils.checkPassword(pass))
+            {
+                if(!application.checkSignUp(email))
+                {
+                    error.setText("This email is already used");
+                }
+                else
+                {
+                    error.setText("SignUp success");
+                    account = new Account(email,pass,IOUtils.getDateTime());
+                    DBConnection.createAccount(account);
+                }
+            }
+            else
+            {
+                error.setText("Password Should has 8-12 character.");
+            }
+        }
+        else
+        {
+            error.setText("Email not valid!!");
         }
     }
 

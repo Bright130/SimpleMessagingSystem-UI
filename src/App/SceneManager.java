@@ -54,7 +54,6 @@ public class SceneManager extends Application{
         try{
             SignupController signup = (SignupController) changeScene("Signup.fxml") ;
             signup.setWindow(this);
-            System.out.println("dfsfsgehth");
 
         }catch (Exception e)
         {
@@ -77,14 +76,13 @@ public class SceneManager extends Application{
 
             return false ;
         }
-        else
-
-            return true;
+        return true;
     }
 
-    public boolean checkSignup(String username, String password)
+    public boolean checkSignUp(String username)
     {
-        if(1==0)
+        account = DBConnection.getAccount(username);
+        if(account==null)
         {
 
             return true ;

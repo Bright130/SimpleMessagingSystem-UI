@@ -48,14 +48,21 @@ public class LoginController extends Parent implements Initializable {
         password.setPromptText("Password");
     }
 
-    public void checkLogin(ActionEvent event){
+    public void checkLogin(ActionEvent event)
+    {
         String email = username.getText();
         String pass = password.getText();
-        if(IOUtils.checkEmail(email)){
+        if(IOUtils.checkEmail(email))
+        {
             if(IOUtils.checkPassword(pass))
             {
-                if(!application.checkLogin(email,password.getText())){
+                if(!application.checkLogin(email,password.getText()))
+                {
                     error.setText("Invalid Id/Pass");
+                }
+                else
+                {
+                    error.setText("Login Success");
                 }
             }
             else
@@ -63,7 +70,8 @@ public class LoginController extends Parent implements Initializable {
                 error.setText("Password not valid!!");
             }
         }
-        else{
+        else
+        {
             error.setText("Email not valid!!");
         }
     }

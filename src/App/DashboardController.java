@@ -48,7 +48,7 @@ public class DashboardController extends Parent implements Initializable {
 
     public void checkSignup(ActionEvent event){
 
-        if(!application.checkSignup(username.getText(),password.getText())){
+        if(!application.checkSignUp(username.getText())){
             error.setText("Someone already used this username");
         }
     }
