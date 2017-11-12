@@ -15,7 +15,7 @@ public class Main extends SceneManager {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(createWindow(),300, 275));
+        primaryStage.setScene(new Scene(createWindow(),750, 420));
         primaryStage.show();
     }
 
