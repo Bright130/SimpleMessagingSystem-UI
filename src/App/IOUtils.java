@@ -1,3 +1,4 @@
+package App;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,6 +62,20 @@ public class IOUtils
         return email;
     }
 
+    public static boolean checkEmail(String email)
+    {
+        Pattern p = Pattern.compile("^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$");
+        Matcher m = p.matcher(email);
+
+        if (!m.find())
+        {
+            System.out.println("Email not valid!!");
+            return false;
+
+        }
+        return true;
+    }
+
     public static String getPassword()
     {
         String password;
@@ -75,6 +90,16 @@ public class IOUtils
         }*/
 
         return password;
+    }
+
+    public static boolean checkPassword(String password)
+    {
+        if(password.length()<8 || password.length()>12)
+        {
+            System.out.println("Password must has 8-12 character!!");
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -1,3 +1,4 @@
+package App;
 public class EmailClient
 {
     private static Account account = new Account();

@@ -49,9 +49,22 @@ public class LoginController extends Parent implements Initializable {
     }
 
     public void checkLogin(ActionEvent event){
-
-        if(!application.checkLogin(username.getText(),password.getText())){
-            error.setText("Invalid Id/Pass");
+        String email = username.getText();
+        String pass = password.getText();
+        if(IOUtils.checkEmail(email)){
+            if(IOUtils.checkPassword(pass))
+            {
+                if(!application.checkLogin(email,password.getText())){
+                    error.setText("Invalid Id/Pass");
+                }
+            }
+            else
+            {
+                error.setText("Password not valid!!");
+            }
+        }
+        else{
+            error.setText("Email not valid!!");
         }
     }
 

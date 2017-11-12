@@ -32,6 +32,10 @@ public class SceneManager extends Application{
     public void start(Stage primaryStage) throws Exception {}
     private StackPane root =new StackPane();
     private GridPane pane = null;
+    private static Account account = new Account();
+
+    private static AccountManager manager = new AccountManager();
+
     public void loginView()
     {
         try{
@@ -67,14 +71,15 @@ public class SceneManager extends Application{
 
     public boolean checkLogin(String username, String password)
     {
-        if(1==1)
+        account = manager.login(username,password);
+        if(account==null)
         {
 
-            return true ;
+            return false ;
         }
         else
 
-            return false;
+            return true;
     }
 
     public boolean checkSignup(String username, String password)

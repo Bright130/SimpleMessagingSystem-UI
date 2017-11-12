@@ -37,6 +37,6 @@
       <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Button fx:id="login" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkLogin" prefWidth="51.0" text="Login" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goSignupView" prefHeight="7.0" prefWidth="53.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Label fx:id="error" prefHeight="10.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label fx:id="error" prefHeight="17.0" prefWidth="147.0" text="Label" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>
