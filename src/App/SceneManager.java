@@ -62,6 +62,19 @@ public class SceneManager extends Application{
 
     }
 
+    private void dashboardView()
+    {
+        try{
+            DashboardController dashboard = (DashboardController) changeScene("Dashboard.fxml") ;
+            dashboard.setWindow(this);
+
+        }catch (Exception e)
+        {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
     public Parent createWindow()
     {
         loginView();
@@ -76,6 +89,7 @@ public class SceneManager extends Application{
 
             return false ;
         }
+        dashboardView();
         return true;
     }
 

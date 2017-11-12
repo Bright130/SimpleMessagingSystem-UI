@@ -4,10 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.TextFlow;
 
 import java.awt.*;
 import java.net.URL;
@@ -25,13 +29,41 @@ import java.util.ResourceBundle;
 
 public class DashboardController extends Parent implements Initializable {
     @FXML
-    TextField username;
+    Tab all;
     @FXML
-    PasswordField password;
+    Tab unread;
     @FXML
-    Button signup;
+    Tab read;
     @FXML
-    Label error;
+    Tab sent;
+    @FXML
+    AnchorPane allPane;
+    @FXML
+    AnchorPane unreadPane;
+    @FXML
+    AnchorPane readPane;
+    @FXML
+    AnchorPane sentPane;
+    @FXML
+    ListView<Button> sentList = new ListView<>();
+    @FXML
+    Button refresh;
+    @FXML
+    Button newMessage;
+    @FXML
+    Button reply;
+    @FXML
+    Button forward;
+    @FXML
+    Button logout;
+    @FXML
+    Label detailPane;
+    @FXML
+    SplitPane splitPane;
+    @FXML
+    GridPane gridPane;
+    @FXML
+    ScrollPane scrollPane;
 
     private SceneManager application;
 
@@ -41,20 +73,14 @@ public class DashboardController extends Parent implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        error.setText("");
-        username.setPromptText("Username");
-        password.setPromptText("Password");
+        detailPane.setText("noiorhiogh0iwhgfgdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n\n\n\nn\n\n\n\n\n\\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\\n\nn\n\n\n\n\n\n\n\n\nfffffffffffffffffffffffffgidfgj  erojojjj");
+        splitPane.prefHeightProperty().bind(gridPane.heightProperty());
+        splitPane.prefWidthProperty().bind(gridPane.widthProperty());
+       // scrollPane.prefViewportHeightProperty().bind(gridPane.heightProperty());
+
     }
 
-    public void checkSignup(ActionEvent event){
 
-        if(!application.checkSignUp(username.getText())){
-            error.setText("Someone already used this username");
-        }
-    }
 
-    public void goLoginView(ActionEvent event){
 
-        application.loginView();
-    }
 }
