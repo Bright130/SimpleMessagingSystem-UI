@@ -51,11 +51,17 @@
                         </Tab>
                         <Tab fx:id="sent" text="Sent">
                            <content>
-                              <AnchorPane fx:id="sentPane" minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="231.0">
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                                  <children>
-                                    <ListView fx:id="sentList" prefHeight="454.0" prefWidth="246.0" />
+                                    <ListView fx:id="sentList" prefHeight="474.0" prefWidth="439.0" />
                                  </children>
-                              </AnchorPane>
+                              </GridPane>
                            </content>
                         </Tab>
                     </tabs>
