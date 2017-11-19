@@ -200,18 +200,18 @@ public class DashboardController extends Parent implements Initializable {
 
     public String getUiText(EmailMessage email)
     {
-        String uiText = "";
-        uiText+="\nFrom : ";
-        uiText+=email.getFromEmail();
-        uiText+="\nDate : ";
-        uiText+=email.getLastModified();
-        uiText+="\nSubject  : ";
-        uiText+=email.getSubject();
-        uiText+="\nTo   : ";
-        uiText+=email.getToEmail();
-        uiText+="\n\n";
-        uiText+=email.getBodyText();
-        return uiText;
+        String textUI = "";
+        textUI+="\nFrom : ";
+        textUI+=email.getFromEmail();
+        textUI+="\nDate : ";
+        textUI+=email.getLastModified();
+        textUI+="\nSubject  : ";
+        textUI+=email.getSubject();
+        textUI+="\nTo   : ";
+        textUI+=email.getToEmail();
+        textUI+="\n\n";
+        textUI+=email.getBodyText();
+        return textUI;
     }
 
     static class ColorRectCell extends ListCell<String> {
