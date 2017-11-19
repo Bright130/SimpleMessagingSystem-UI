@@ -1,4 +1,6 @@
 package App;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class DashBoard
@@ -13,6 +15,16 @@ public class DashBoard
 
     private ArrayList<EmailMessage> sentMsg;
 
+    private ArrayList<String> subSentMsg;
+
+    private ArrayList<String> subAllMsg;
+
+    private ArrayList<String> subReadMsg;
+
+    private ArrayList<String> subUnreadMsg;
+
+    //private ObservableList<String> subSentMsg;
+
     private Account myAccount;
 
     private EmailMessage message;
@@ -20,10 +32,12 @@ public class DashBoard
     DashBoard(Account account)
     {
         this.myAccount = account;
+        readEmail();
     }
 
     public void readEmail()
     {
+        System.out.println(myAccount.getEmail());
         allMsg = DBConnection.getMessage(myAccount);
         readMsg = new ArrayList<EmailMessage>();
         unReadMsg = new ArrayList<EmailMessage>();
@@ -34,14 +48,20 @@ public class DashBoard
             if(m.getIsRead()==1&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 unReadMsg.add(m);
+                subUnreadMsg.add(m.getSubject());
+                subAllMsg.add(m.getSubject());
             }
             else if(m.getIsRead()==0&&m.getIsReaderDel()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 readMsg.add(m);
+                subReadMsg.add(m.getSubject());
+                subAllMsg.add(m.getSubject());
             }
             else if(myAccount.getEmail().equals(m.getFromEmail())&&m.getIsSenderDel()==0)
             {
                 sentMsg.add(m);
+                subSentMsg.add(m.getSubject());
+                subAllMsg.add(m.getSubject());
             }
         }
     }
@@ -226,5 +246,32 @@ public class DashBoard
             i=1;
             readEmail();
         }while (number!=7);
+    }
+
+    public ArrayList<String> getSubAllMsg()
+    {
+        return subAllMsg;
+    }
+
+    public ArrayList<String> getSubReadMsg()
+    {
+        return subReadMsg;
+    }
+
+    public ArrayList<EmailMessage> getSubSentMsg() {
+        return sentMsg;
+    }
+
+    public ArrayList<String> getSubUnreadMsg()
+    {
+        return subUnreadMsg;
+    }
+
+    public void printTest()
+    {
+        for(String a: subAllMsg)
+        {
+            System.out.println(a);
+        }
     }
 }
