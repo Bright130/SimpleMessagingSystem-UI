@@ -37,7 +37,7 @@ public class Editor
         }
         for(String n: fields)
         {
-            EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),n,currentAccount.getEmail(),subject,body.getBodyText(),1,0,0);
+            EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),n,currentAccount.getEmail(),subject,body.getBodyText(),0,0,0);
             multiMsg.add(msg);
         }
         String response = IOUtils.getString("\nSend? ");

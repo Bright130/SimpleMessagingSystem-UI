@@ -7,7 +7,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -35,18 +34,48 @@
                   <TabPane prefHeight="485.0" prefWidth="123.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab fx:id="all" text="ALL">
-                        <content>
-                          <AnchorPane fx:id="allPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
+                           <content>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ListView fx:id="allList" prefHeight="474.0" prefWidth="439.0" />
+                                 </children>
+                              </GridPane>
+                           </content>
                       </Tab>
                       <Tab fx:id="unread" text="Unread">
-                        <content>
-                          <AnchorPane fx:id="unreadPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
+                           <content>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ListView fx:id="unreadList" prefHeight="474.0" prefWidth="439.0" />
+                                 </children>
+                              </GridPane>
+                           </content>
                       </Tab>
                         <Tab fx:id="read" text="Read">
                            <content>
-                              <AnchorPane fx:id="readPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ListView fx:id="readList" prefHeight="474.0" prefWidth="439.0" />
+                                 </children>
+                              </GridPane>
                            </content>
                         </Tab>
                         <Tab fx:id="sent" text="Sent">
@@ -97,8 +126,8 @@
                                     </HBox>
                                     <HBox alignment="CENTER_RIGHT" minHeight="30.0" prefHeight="30.0" prefWidth="239.0">
                                        <children>
-                                          <Button fx:id="refresh" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" text="Refresh" />
-                                          <Button fx:id="logout" mnemonicParsing="false" prefHeight="30.0" prefWidth="91.0" text="Logout" />
+                                          <Button fx:id="refresh" mnemonicParsing="false" onAction="#goDashboardView" prefHeight="30.0" prefWidth="73.0" text="Refresh" />
+                                          <Button fx:id="logout" mnemonicParsing="false" onAction="#goLoginView" prefHeight="30.0" prefWidth="91.0" text="Logout" />
                                        </children>
                                     </HBox>
                                  </children>

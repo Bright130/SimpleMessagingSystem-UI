@@ -57,13 +57,11 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     Tab sent;
     @FXML
-    AnchorPane allPane;
+    ListView<String> allList = new ListView<>();
     @FXML
-    AnchorPane unreadPane;
+    ListView<String> unreadList = new ListView<>();
     @FXML
-    AnchorPane readPane;
-    @FXML
-    AnchorPane sentPane;
+    ListView<String> readList = new ListView<>();
     @FXML
     ListView<String> sentList = new ListView<>();
     @FXML
@@ -85,7 +83,7 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     ScrollPane scrollPane;
 
-    ListView<String> list = new ListView<String>();
+
 
     private SceneManager application;
 
@@ -97,6 +95,8 @@ public class DashboardController extends Parent implements Initializable {
 
     private ArrayList<EmailMessage> sentMsg;
 
+    private EmailMessage currentMsg;
+
     private ArrayList<String> subSentMsg = new ArrayList<String>();
 
     private ArrayList<String> subAllMsg = new ArrayList<String>();
@@ -107,13 +107,15 @@ public class DashboardController extends Parent implements Initializable {
 
     private Account myAccount;
 
+
+
     public void setWindow(SceneManager application)
     {
         this.application = application ;
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
+    private void fetchEmail()
+    {
         myAccount = SceneManager.getAccount();
         allMsg = DBConnection.getMessage(myAccount);
         readMsg = new ArrayList<EmailMessage>();
@@ -123,85 +125,112 @@ public class DashboardController extends Parent implements Initializable {
 
         for (EmailMessage m : allMsg)
         {
-            if(m.getIsRead()==1&&myAccount.getEmail().equals(m.getToEmail()))
+            if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 subjectDetail="";
                 unReadMsg.add(m);
-                subUnreadMsg.add(m.getSubject());
                 subjectDetail+="From : "+m.getFromEmail();
                 subjectDetail+="\n"+m.getSubject();
                 subjectDetail+="\n"+m.getLastModified();
+                subUnreadMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
             }
-            else if(m.getIsRead()==0&&m.getIsReaderDel()==0&&myAccount.getEmail().equals(m.getToEmail()))
+            else if(m.getIsRead()==1&&m.getIsReaderDel()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 subjectDetail="";
                 readMsg.add(m);
-                subReadMsg.add(m.getSubject());
                 subjectDetail+="From : "+m.getFromEmail();
                 subjectDetail+="\n"+m.getSubject();
                 subjectDetail+="\n"+m.getLastModified();
+                subReadMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
             }
             else if(myAccount.getEmail().equals(m.getFromEmail())&&m.getIsSenderDel()==0)
             {
                 subjectDetail="";
                 sentMsg.add(m);
-                subSentMsg.add(m.getSubject());
                 subjectDetail+="Send : "+m.getToEmail();
                 subjectDetail+="\n"+m.getSubject();
                 subjectDetail+="\n"+m.getLastModified();
+                subSentMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
 
-
-
-
+        fetchEmail();
         detailPane.setText("noiorhiogh0iwhgfgdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n\n\n\nn\n\n\n\n\n\\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\\n\nn\n\n\n\n\n\n\n\n\nfffffffffffffffffffffffffgidfgj  erojojjj");
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
         splitPane.prefWidthProperty().bind(gridPane.widthProperty());
-        ObservableList<String> data = FXCollections.observableArrayList(subAllMsg);
-        /*ObservableList<String> data = FXCollections.observableArrayList(
-                "chocolaoooooooooooooooooooooooooooooooooooote", "salmon", "gold", "coral", "darkorchid",
-                "darkgoldenrod", "lightsalmon", "black", "rosybrown");*/
+        generateEmailList(allList,subAllMsg,allMsg);
+        generateEmailListUnread(unreadList,subUnreadMsg,unReadMsg);
+        generateEmailList(readList,subReadMsg,readMsg);
+        generateEmailList(sentList,subSentMsg,sentMsg);
+    }
 
-
-
-
-        sentList.getSelectionModel();
-
-        sentList.setItems(data);
-
-
-
-        sentList.setCellFactory(new Callback<ListView<String>,
+    private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg ){
+        ObservableList<String> data = FXCollections.observableArrayList(subMsg);
+        listView.getSelectionModel();
+        listView.setItems(data);
+        listView.setCellFactory(new Callback<ListView<String>,
                                         ListCell<String>>() {
                                     @Override
                                     public ListCell<String> call(ListView<String> list) {
-                                        return new ColorRectCell();
+                                        return new EmailCardCell();
                                     }
                                 }
         );
 
-        sentList.getSelectionModel().selectedItemProperty().addListener(
+        listView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val) {
-                        System.out.println("Val ="+ new_val);
-                        detailPane.setText(getUiText(allMsg.get(sentList.getSelectionModel().getSelectedIndex())));
+                        // System.out.println("Val ="+ new_val);
+                        currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
+                        detailPane.setText(getDetailMessage(currentMsg));
                         //detailPane.setText(allMsg.get(sentList.getSelectionModel().getSelectedIndex()).getBodyText());
                     }
                 });
 
+    }
+
+    private void generateEmailListUnread( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg ){
+        ObservableList<String> data = FXCollections.observableArrayList(subMsg);
+        listView.getSelectionModel();
+        listView.setItems(data);
+        listView.setCellFactory(new Callback<ListView<String>,
+                                        ListCell<String>>() {
+                                    @Override
+                                    public ListCell<String> call(ListView<String> list) {
+                                        return new EmailCardCell();
+                                    }
+                                }
+        );
+
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<String>() {
+                    public void changed(ObservableValue<? extends String> ov,
+                                        String old_val, String new_val) {
+                        // System.out.println("Val ="+ new_val);
+                        currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
+                        detailPane.setText(getDetailMessage(currentMsg));
+                        currentMsg.setIsRead(1);
+                        DBConnection.updateStatusMessage(currentMsg);
+                        //detailPane.setText(allMsg.get(sentList.getSelectionModel().getSelectedIndex()).getBodyText());
+                    }
+                });
 
     }
 
-    public String getUiText(EmailMessage email)
+
+    private String getDetailMessage(EmailMessage email)
     {
         String textUI = "";
-        textUI+="\nFrom : ";
+        textUI+="From : ";
         textUI+=email.getFromEmail();
         textUI+="\nDate : ";
         textUI+=email.getLastModified();
@@ -214,14 +243,28 @@ public class DashboardController extends Parent implements Initializable {
         return textUI;
     }
 
-    static class ColorRectCell extends ListCell<String> {
+    static class EmailCardCell extends ListCell<String> {
         @Override
         public void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
-            Label rect = new Label(item);
+            Label label = new Label(item);
             if (item != null) {
-                setGraphic(rect);
+                setGraphic(label);
             }
         }
+    }
+
+    // TODO: 11/20/2017 Event close immediately
+
+
+    public void goLogoutView(ActionEvent event){
+
+       application.logoutView();
+    }
+
+    // TODO: 11/20/2017  Update refresh time in account
+    public void goDashboardView(ActionEvent event){
+
+        application.dashboardView();
     }
 }

@@ -51,6 +51,20 @@ public class SceneManager extends Application{
 
     }
 
+    public void logoutView()
+    {
+        try{
+            // TODO: 20/11/2017 Logout in AccountManager and use it here.
+            LoginController login = (LoginController) changeScene("Login.fxml") ;
+            login.setWindow(this);
+
+        }catch (Exception e)
+        {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
     public void signupView()
     {
         try{
@@ -64,7 +78,7 @@ public class SceneManager extends Application{
 
     }
 
-    private void dashboardView()
+    public void dashboardView()
     {
         //myDashBoard = new DashBoard(account);
         try{
