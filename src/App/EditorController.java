@@ -1,0 +1,112 @@
+package App;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.TextFlow;
+import javafx.util.Callback;
+
+import java.awt.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+
+public class EditorController extends Parent implements Initializable{
+
+    @FXML
+    Button send;
+    @FXML
+    Button close;
+    @FXML
+    VBox vbox ;
+    @FXML
+    TextField toAccount;
+    @FXML
+    TextField fromAccount;
+    @FXML
+    TextField subject;
+    @FXML
+    TextArea body;
+    @FXML
+    GridPane gridPane;
+    @FXML
+    GridPane gridPane2;
+    @FXML
+    HBox fromBox;
+    @FXML
+    HBox toBox;
+    @FXML
+    HBox subjectBox;
+    @FXML
+    Label toText;
+    @FXML
+    Label fromText;
+    @FXML
+    Label subjectText;
+
+
+    private SceneManager application;
+
+    public void setWindow(SceneManager application)
+    {
+        this.application = application ;
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
+
+        gridPane2.prefHeightProperty().bind(gridPane.heightProperty());
+        gridPane2.prefWidthProperty().bind(gridPane.widthProperty());
+        body.prefHeightProperty().bind(gridPane2.heightProperty().subtract(107));
+        body.prefWidthProperty().bind(gridPane2.widthProperty().subtract(2));
+
+        toAccount.prefWidthProperty().bind(toBox.widthProperty().subtract(57));
+        fromAccount.prefWidthProperty().bind(fromBox.widthProperty().subtract(57));
+        subject.prefWidthProperty().bind(subjectBox.widthProperty().subtract(57));
+
+    }
+
+    public void goDashboardView(ActionEvent event){
+
+        application.dashboardView();
+    }
+
+    public void sendMessage(ActionEvent event){
+
+        application.dashboardView();
+    }
+}

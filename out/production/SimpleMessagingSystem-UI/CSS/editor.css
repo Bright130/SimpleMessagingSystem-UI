@@ -1,0 +1,38 @@
+
+.root{
+	/*-fx-text-box-border: 0;*/
+	/*-fx-base : #CFD8DC ;*/
+	/*-fx-control-inner-background:#FAFAFA;*/
+	-fx-background-radius:0;
+	/*-fx-text-fill:#212121;*/
+/*	-fx-focus-color: #b9b9b9;
+	-fx-faint-focus-color : #e4e4e442 ;*/
+	-fx-background-color:#FAFAFA;
+}
+.button{
+	-fx-base:#1565C0;
+	-fx-background-radius:0;
+	-fx-border-color:#19212a;
+	-fx-text-fill:#FAFAFA;
+}
+
+.scroll-bar>*.thumb{
+	-fx-background-radius:0;
+	-fx-background-color:#b9b9b9;
+	/*-fx-inner-border: #FAFAFA;*/
+	/*-fx-background-insets:0;*/
+
+}
+.scroll-bar:horizontal{
+	-fx-background-color:#e6e6e6;
+}
+
+.scroll-bar:vertical{
+	-fx-background-color:#e6e6e6;
+}
+
+.text-field{
+	-fx-background-radius:0;
+}
+
+

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
+<GridPane fx:id="grid" alignment="CENTER" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-image: url(&quot;/IMG/homeBG.png&quot;);" stylesheets="@../CSS/home.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -26,17 +26,17 @@
 
          </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+      <Text fill="#fafafa" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
          <font>
             <Font name="Arial" size="37.0" />
          </font>
       </Text>
-      <Label text="Username" GridPane.rowIndex="2" />
-      <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Password" GridPane.rowIndex="3" />
-      <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="login" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkLogin" prefWidth="51.0" text="Login" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goSignupView" prefHeight="7.0" prefWidth="53.0" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Label fx:id="error" alignment="CENTER" prefHeight="17.0" prefWidth="212.0" text="Label" textAlignment="CENTER" textFill="RED" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
+      <Label text="Username" textFill="#fafafa" GridPane.rowIndex="2" />
+      <TextField fx:id="username" style="-fx-background-color: #FAFAFA; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Password" textFill="#fafafa" GridPane.rowIndex="3" />
+      <PasswordField fx:id="password" style="-fx-background-color: FAFAFA; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button fx:id="login" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#checkLogin" prefWidth="51.0" style="-fx-base: #61b865; -fx-background-radius: 0;" text="Login" textFill="#212121" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="signup" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goSignupView" prefHeight="7.0" prefWidth="53.0" style="-fx-base: #3ca1f3; -fx-background-radius: 0;" text="Signup" textFill="#212121" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <Label fx:id="error" alignment="CENTER" prefHeight="17.0" prefWidth="212.0" text="Label" textAlignment="CENTER" textFill="#f44336" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
    </children>
 </GridPane>

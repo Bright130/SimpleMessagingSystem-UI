@@ -42,6 +42,7 @@ public class SceneManager extends Application{
     {
         try{
             LoginController login = (LoginController) changeScene("Login.fxml") ;
+
             login.setWindow(this);
 
         }catch (Exception e)
@@ -77,7 +78,18 @@ public class SceneManager extends Application{
         }
 
     }
+    public void editorView()
+    {
+        try{
+            EditorController ecitor = (EditorController) changeScene("Editor.fxml") ;
+            ecitor.setWindow(this);
 
+        }catch (Exception e)
+        {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
     public void dashboardView()
     {
         //myDashBoard = new DashBoard(account);

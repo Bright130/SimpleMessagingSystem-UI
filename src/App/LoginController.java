@@ -34,6 +34,8 @@ public class LoginController extends Parent implements Initializable {
     Button signup;
     @FXML
     Label error;
+    @FXML
+    GridPane grid;
 
     private SceneManager application;
 

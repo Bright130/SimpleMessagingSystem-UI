@@ -75,13 +75,17 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     Button logout;
     @FXML
-    Label detailPane;
+    TextArea detailPane;
     @FXML
     SplitPane splitPane;
     @FXML
     GridPane gridPane;
     @FXML
+    GridPane gridPane2;
+    @FXML
     ScrollPane scrollPane;
+    @FXML
+    VBox rightBox;
 
 
 
@@ -129,7 +133,7 @@ public class DashboardController extends Parent implements Initializable {
             {
                 subjectDetail="";
                 unReadMsg.add(m);
-                subjectDetail+="From : "+m.getFromEmail();
+                subjectDetail+="(*)From : "+m.getFromEmail();
                 subjectDetail+="\n"+m.getSubject();
                 subjectDetail+="\n"+m.getLastModified();
                 subUnreadMsg.add(subjectDetail);
@@ -163,9 +167,12 @@ public class DashboardController extends Parent implements Initializable {
 
 
         fetchEmail();
-        detailPane.setText("noiorhiogh0iwhgfgdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n\n\n\nn\n\n\n\n\n\\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\\n\nn\n\n\n\n\n\n\n\n\nfffffffffffffffffffffffffgidfgj  erojojjj");
+        detailPane.setText("noiorhiogh0iwhgfgdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n\n\n\nn\n\n\n\n\n\\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\\n\nn\n\n\n\n\n\n\n\n\nfffffffffffffffffffffffffgidfgj  erojojjj");
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
         splitPane.prefWidthProperty().bind(gridPane.widthProperty());
+        detailPane.prefWidthProperty().bind(gridPane.heightProperty().subtract(30));
+        scrollPane.prefWidthProperty().bind(gridPane.heightProperty().subtract(0));
+        detailPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(0));
         generateEmailList(allList,subAllMsg,allMsg);
         generateEmailListUnread(unreadList,subUnreadMsg,unReadMsg);
         generateEmailList(readList,subReadMsg,readMsg);
@@ -252,6 +259,27 @@ public class DashboardController extends Parent implements Initializable {
                 setGraphic(label);
             }
         }
+    }
+
+
+
+    public void goReplyView(ActionEvent event){
+
+        application.editorView();
+    }
+
+    public void goForwardView(ActionEvent event){
+
+        application.editorView();
+    }
+    public void goNewMessageView(ActionEvent event){
+
+        application.editorView();
+    }
+
+    public void deleteMessage(ActionEvent event){
+
+        application.editorView();
     }
 
     // TODO: 11/20/2017 Event close immediately
