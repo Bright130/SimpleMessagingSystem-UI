@@ -82,6 +82,8 @@ public class EditorController extends Parent implements Initializable{
 
     private Account account;
 
+    private AccountManager accountManager;
+
     private EmailMessage msg;
 
     private int order = 0;
@@ -116,6 +118,8 @@ public class EditorController extends Parent implements Initializable{
     }
 
     public void sendMessage(ActionEvent event){
+
+        int checkEmail=1;
 
         if(order>1)
         {
@@ -156,17 +160,31 @@ public class EditorController extends Parent implements Initializable{
         String allContact = toAccount.getText();
         String fields[] = allContact.split(",");
 
+        multiEmail.clear();
         for(String contact: fields)
         {
+            if(!accountManager.checkEmail(contact))
+            {
+                toAccount.setStyle("-fx-border-color:#f44336;");
+                checkEmail=0;
+            }
             EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
             multiEmail.add(msg);
         }
 
-        for(EmailMessage e:multiEmail)
+        if(checkEmail==1)
         {
-            account.sendMessage(e);
+            for(EmailMessage e:multiEmail)
+            {
+                account.sendMessage(e);
+            }
+            application.dashboardView();
         }
-        application.dashboardView();
+    }
+
+    public void setAccountManager(AccountManager accountManager)
+    {
+        this.accountManager = accountManager;
     }
 
     public void setAccount(Account account)

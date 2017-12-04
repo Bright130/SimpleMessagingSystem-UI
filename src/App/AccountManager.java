@@ -39,6 +39,23 @@ public class AccountManager
         }
         return account;
     }
+
+    /**
+     * Check the email that correctly following the pattern form should be 8-12 character
+     * @param   email      String of email
+     * @param   password   String of password
+     * @return if the program can find an account it will return that account but return null
+     */
+    public boolean checkEmail(String email)
+    {
+        Account temp;
+        temp = DBConnection.getAccount(email);
+        if(temp!=null)
+        {
+            return true;
+        }
+        return false;
+    }
     // TODO: 20/11/2017 Logout
 //
 //    public boolean logout(String email, Date upDateTime)

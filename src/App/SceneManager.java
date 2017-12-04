@@ -80,6 +80,7 @@ public class SceneManager extends Application{
     {
         try{
             EditorController ecitor = (EditorController) changeScene("Editor.fxml") ;
+            ecitor.setAccountManager(manager);
             ecitor.setAccount(account);
             ecitor.setOrder(order);
             if(order>1)
