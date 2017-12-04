@@ -6,8 +6,11 @@
         This editor will apprear when you send,reply or
         forward an email.
 
-    Created by Chainarong Tumapha (Bright) 58070503409
-            4 Nov. 2017
+    Created by Chainarong Tumapha (Bright)  58070503409 AND
+               Paween Surimittragool (Jarb) 58070503457
+
+        Group BJ
+        4 Nov. 2017
 -->
 
 <?import javafx.scene.control.Button?>

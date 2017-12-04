@@ -1,56 +1,55 @@
+/**
+ *    LoginController
+ *       A class that control the flow of program when user interacts in
+ *      Login view
+ *
+ *   Created by Chainarong Tumapha (Bright)  58070503409 AND
+ *              Paween Surimittragool (Jarb) 58070503457
+ *
+ *       Group BJ
+ *       24 Oct. 2017
+ */
+
 package App;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class LoginController extends Parent implements Initializable {
     @FXML
-    TextField username;
+    /** Username text field */
+    private TextField username;
     @FXML
-    PasswordField password;
+    /** Password text field */
+    private PasswordField password;
     @FXML
-    Button login;
-    @FXML
-    Button signup;
-    @FXML
-    Label error;
-    @FXML
-    GridPane grid;
-
+    /** Lable for display error text */
+    private Label error;
+    /** This window application */
     private SceneManager application;
 
+    /** setter method for window application */
     public void setWindow(SceneManager application)
     {
         this.application = application ;
     }
     @Override
+    /** An override method to initial this window */
     public void initialize(URL location, ResourceBundle resources) {
         error.setText("");
         username.setPromptText("Username");
         password.setPromptText("Password");
     }
 
-    public void checkLogin(ActionEvent event)
+    /** Method that checks the authentication */
+    public void checkLogin()
     {
         String email = username.getText();
         String pass = password.getText();
@@ -58,28 +57,24 @@ public class LoginController extends Parent implements Initializable {
         {
             if(IOUtils.checkPassword(pass))
             {
-                if(!application.checkLogin(email,password.getText()))
+                if(!application.checkLogin(email,pass))
                 {
-                    error.setText("Invalid Id/Pass");
-                }
-                else
-                {
-                    error.setText("Login Success");
+                    error.setText("Invalid Email/Password");
                 }
             }
             else
             {
-                error.setText("Password not valid!!");
+                error.setText("Password is not valid!!");
             }
         }
         else
         {
-            error.setText("Email not valid!!");
+            error.setText("Email is not valid!!");
         }
     }
 
-
-    public void goSignupView(ActionEvent event){
+    /** Method that redirects to Signup view */
+    public void goSignupView(){
 
         application.signupView();
     }
