@@ -41,10 +41,9 @@ public class AccountManager
     }
 
     /**
-     * Check the email that correctly following the pattern form should be 8-12 character
+     * Check the email that available in database
      * @param   email      String of email
-     * @param   password   String of password
-     * @return if the program can find an account it will return that account but return null
+     * @return if the program can find an account it will return true but return false
      */
     public boolean checkEmail(String email)
     {

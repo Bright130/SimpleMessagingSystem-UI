@@ -99,62 +99,6 @@ public class DBConnection {
         return true;
     }
 
-    public static boolean updateAccount(Account account) {
-
-        Connection connection = openDB();
-        if(connection == null)
-            return false;
-        Statement statement = null;
-
-        try{
-            statement = connection.createStatement();
-            statement.executeUpdate("UPDATE Account set "+
-                                        "passwordUser = '"+account.getPassword()+"',"+
-                                        "lastRefresh = '"+account.getLastUpdate()+"' "+
-                                        "WHERE username like '"+account.getEmail()+"' "+
-                                        " ;"
-            );
-
-            statement.close();
-            connection.commit();
-            connection.close();
-            System.out.println("Update successfully");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean deleteAccount(Account account) {
-
-        Connection connection = openDB();
-        if(connection == null)
-            return false;
-        Statement statement = null;
-
-        try{
-
-            statement = connection.createStatement();
-            statement.executeUpdate("DELETE from Account "+
-                    "WHERE username like '"+account.getEmail()+"' "+
-                    " ;"
-            );
-
-            statement.close();
-            connection.commit();
-            connection.close();
-            System.out.println("Delete successfully");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            return false;
-        }
-        return true;
-    }
-
-
-
-
     public static ArrayList<EmailMessage> getMessage(Account account) {
 
         Connection connection = openDB();
@@ -292,41 +236,4 @@ public class DBConnection {
         }
         return true;
     }
-//    public static ArrayList<Account> getAccounts() {
-//
-//        Connection connection = openDB();
-//        if(connection == null)
-//            return null;
-//        ArrayList<Account> accounts = new ArrayList<Account>();
-//        Statement statement = null;
-//        ResultSet resultSet = null;
-//        try{
-//            statement = connection.createStatement();
-//
-//            resultSet = statement.executeQuery( "SELECT * FROM Account  ;");
-//
-//            while ( resultSet.next() ) {
-//
-//                accounts.add(new Account(resultSet.getString("username"),
-//                        resultSet.getString("passwordUser"),
-//                        resultSet.getString("lastRefresh")
-//                ));
-//            }
-//
-//            resultSet.close();
-//            statement.close();
-//            connection.close();
-//            System.out.println("Records created successfully");
-//        } catch ( Exception e ) {
-//            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-//
-//        }
-//        return accounts;
-//    }
-
-
-
-
-
-
 }

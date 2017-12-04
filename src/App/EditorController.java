@@ -1,3 +1,13 @@
+/**
+ *    EditorController
+ *      This class have member variables and methods for create an email
+ *      for send in 3 types New Message, Reply Message and Forward
+ *   Created by Chainarong Tumapha (Bright)  58070503409 AND
+ *              Paween Surimittragool (Jarb) 58070503457
+ *
+ *       Group BJ
+ *       24 Oct. 2017
+ */
 package App;
 
 import java.net.URL;
@@ -79,7 +89,9 @@ public class EditorController extends Parent implements Initializable{
     @FXML
     Label error;
 
-
+    /**
+     *  The member variables.
+     */
     private SceneManager application;
 
     private Account account;
@@ -93,15 +105,12 @@ public class EditorController extends Parent implements Initializable{
     ArrayList<EmailMessage> multiEmail = new ArrayList<>();
 
 
-
     public void setWindow(SceneManager application)
     {
         this.application = application ;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
 
         gridPane2.prefHeightProperty().bind(gridPane.heightProperty());
         gridPane2.prefWidthProperty().bind(gridPane.widthProperty());
@@ -121,10 +130,17 @@ public class EditorController extends Parent implements Initializable{
         application.dashboardView();
     }
 
+    /**
+     * Send emailMessage have 3 main method New message, Reply message and forward message
+     */
     public void sendMessage(ActionEvent event){
 
         int checkEmail=1;
 
+        /**
+         * If order > 1 it mean this program will do reply or forward
+         * before send new email it will write old message
+         */
         if(order>1)
         {
             String originalMessage = body.getText();
@@ -164,17 +180,48 @@ public class EditorController extends Parent implements Initializable{
         String allContact = toAccount.getText();
         String fields[] = allContact.split(",");
 
+        String a;
+
         multiEmail.clear();
-        for(String contact: fields)
+
+        /**
+        * Check variable before send an email
+        * */
+        a=toAccount.getText();
+        if(a.trim().isEmpty())
         {
-            if(!accountManager.checkEmail(contact))
+            toAccount.setStyle("-fx-border-color:#f44336;");
+            error.setText("ERROR!! Miss ToAccount");
+            checkEmail=0;
+        }
+        a=subject.getText();
+        if(a.trim().isEmpty())
+        {
+            subject.setStyle("-fx-border-color:#f44336;");
+            error.setText("ERROR!! Miss subject");
+            checkEmail=0;
+        }
+        a=body.getText();
+        if(a.trim().isEmpty())
+        {
+            body.setStyle("-fx-border-color:#f44336;");
+            error.setText("ERROR!! Miss body");
+            checkEmail=0;
+        }
+        if(checkEmail==1)
+        {
+            for(String contact: fields)
             {
-                toAccount.setStyle("-fx-border-color:#f44336;");
-                error.setText("ERROR!! Miss contact => '"+contact+"' !!");
-                checkEmail=0;
+                if(!accountManager.checkEmail(contact))
+                {
+                    toAccount.setStyle("-fx-border-color:#f44336;");
+                    error.setText("ERROR!! Miss contact => '"+contact+"' !!");
+                    checkEmail=0;
+                    break;
+                }
+                EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
+                multiEmail.add(msg);
             }
-            EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
-            multiEmail.add(msg);
         }
 
         if(checkEmail==1)
@@ -187,27 +234,42 @@ public class EditorController extends Parent implements Initializable{
         }
     }
 
+    /**
+     *  Get accountManager from changed SceneManager for set setAccountManager.
+     */
     public void setAccountManager(AccountManager accountManager)
     {
         this.accountManager = accountManager;
     }
 
+    /**
+     *  Get account from changed SceneManager for set setAccount.
+     */
     public void setAccount(Account account)
     {
         this.account = account;
         fromAccount.setText(account.getEmail());
     }
 
+    /**
+     *  Get account from Dashboard for set setMsg for do reply or forward method.
+     */
     public void setMsg(EmailMessage msg)
     {
         this.msg = msg;
     }
 
+    /**
+     *  Get account from Dashboard for set setOrder for do confirm user's action.
+     */
     public void setOrder(int order)
     {
         this.order = order;
     }
 
+    /**
+     *  Get toAccountEmail from Dashboard for set toAccount for confirm toEmail in reply method.
+     */
     public void setToAccount(String toAccount)
     {
         this.toAccount.setText(toAccount);

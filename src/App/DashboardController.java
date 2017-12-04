@@ -1,3 +1,14 @@
+/**
+ *    dashboardController
+ *      This class have member variables and methods for filter email
+ *      and separate them to correct email type(Read, UnRead and Send).
+ *      Method for Show the information of an email
+ *   Created by Chainarong Tumapha (Bright)  58070503409 AND
+ *              Paween Surimittragool (Jarb) 58070503457
+ *
+ *       Group BJ
+ *       24 Oct. 2017
+ */
 package App;
 
 import javafx.beans.value.ChangeListener;
@@ -87,7 +98,9 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     VBox rightBox;
 
-
+    /**
+     *  The member variables.
+     */
 
     private SceneManager application;
 
@@ -119,6 +132,9 @@ public class DashboardController extends Parent implements Initializable {
         this.application = application ;
     }
 
+    /**
+     *  Connect the email from database after that filter them and separate to correct type
+     */
     private void fetchEmail()
     {
         myAccount = SceneManager.getAccount();
@@ -237,7 +253,11 @@ public class DashboardController extends Parent implements Initializable {
 
     }
 
-
+    /**
+     * Check the email that correctly following the pattern form should be 8-12 character
+     * @param   email   EmailMessage that hold the information
+     * @return true String about information of email for show in the board
+     */
     private String getDetailMessage(EmailMessage email)
     {
         String textUI = "";
@@ -266,7 +286,9 @@ public class DashboardController extends Parent implements Initializable {
     }
 
 
-
+    /**
+     *  Send email that want to reply and order for reply method
+     */
     public void goReplyView(ActionEvent event){
 
         if(currentMsg!=null)
@@ -275,6 +297,9 @@ public class DashboardController extends Parent implements Initializable {
         }
     }
 
+    /**
+     *  Send email that want to forward and order for forward method
+     */
     public void goForwardView(ActionEvent event){
 
         if(currentMsg!=null)
@@ -282,12 +307,19 @@ public class DashboardController extends Parent implements Initializable {
             application.editorView(currentMsg,3);
         }
     }
+
+    /**
+     *  Send order for NewMessage method
+     */
     public void goNewMessageView(ActionEvent event){
 
         currentMsg = null;
         application.editorView(currentMsg,1);
     }
 
+    /**
+     *  Delete the current email that user select
+     */
     public void deleteMessage(ActionEvent event){
 
         if(currentMsg!=null)
