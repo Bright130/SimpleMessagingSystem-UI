@@ -78,10 +78,21 @@ public class SceneManager extends Application{
         }
 
     }
-    public void editorView()
+
+    public void editorView(EmailMessage msg,int order)
     {
         try{
             EditorController ecitor = (EditorController) changeScene("Editor.fxml") ;
+            ecitor.setAccount(account);
+            ecitor.setOrder(order);
+            if(order>1)
+            {
+                ecitor.setMsg(msg);
+                if(order==2)
+                {
+                    ecitor.setToAccount(msg.getFromEmail());
+                }
+            }
             ecitor.setWindow(this);
 
         }catch (Exception e)
@@ -90,6 +101,9 @@ public class SceneManager extends Application{
         }
 
     }
+
+
+
     public void dashboardView()
     {
         //myDashBoard = new DashBoard(account);

@@ -80,6 +80,18 @@ public class EditorController extends Parent implements Initializable{
 
     private SceneManager application;
 
+    private Account account;
+
+    private EmailMessage msg;
+
+    private EmailMessage newMsg;
+
+    private int order = 0;
+
+    ArrayList<EmailMessage> multiEmail = new ArrayList<EmailMessage>();
+
+
+
     public void setWindow(SceneManager application)
     {
         this.application = application ;
@@ -107,6 +119,78 @@ public class EditorController extends Parent implements Initializable{
 
     public void sendMessage(ActionEvent event){
 
+        if(order>1)
+        {
+            String originalMessage = body.getText();
+            if(order==2)
+            {
+                toAccount.setText(msg.getFromEmail());
+                originalMessage+="\n\n-------------------Original message----------------------";
+                originalMessage+="\nFrom : ";
+                originalMessage+=msg.getFromEmail();
+                originalMessage+="\nDate : ";
+                originalMessage+=msg.getLastModified();
+                originalMessage+="\nSubject  : ";
+                originalMessage+=msg.getSubject();
+                originalMessage+="\nTo   : ";
+                originalMessage+=msg.getToEmail();
+                originalMessage+="\n\n";
+                originalMessage+=msg.getBodyText();
+                body.setText(originalMessage);
+            }
+            else if(order==3)
+            {
+                originalMessage+="\n\n-------------------Forwarded message----------------------";
+                originalMessage+="\nFrom : ";
+                originalMessage+=msg.getFromEmail();
+                originalMessage+="\nDate : ";
+                originalMessage+=msg.getLastModified();
+                originalMessage+="\nSubject  : ";
+                originalMessage+=msg.getSubject();
+                originalMessage+="\nTo   : ";
+                originalMessage+=msg.getToEmail();
+                originalMessage+="\n\n";
+                originalMessage+=msg.getBodyText();
+                body.setText(originalMessage);
+            }
+        }
+
+        String allContact = toAccount.getText();
+        String fields[] = allContact.split(",");
+
+        for(String contact: fields)
+        {
+            EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
+            multiEmail.add(msg);
+        }
+
+        for(EmailMessage e:multiEmail)
+        {
+            account.sendMessage(e);
+        }
         application.dashboardView();
     }
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
+        fromAccount.setText(account.getEmail());
+    }
+
+    public void setMsg(EmailMessage msg)
+    {
+        this.msg = msg;
+    }
+
+    public void setOrder(int order)
+    {
+        this.order = order;
+    }
+
+    public void setToAccount(String toAccount)
+    {
+        this.toAccount.setText(toAccount);
+        this.toAccount.setEditable(false);
+    }
+
 }

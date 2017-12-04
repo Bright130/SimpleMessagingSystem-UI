@@ -101,15 +101,16 @@ public class DashboardController extends Parent implements Initializable {
 
     private EmailMessage currentMsg;
 
-    private ArrayList<String> subSentMsg = new ArrayList<String>();
+    private ArrayList<String> subSentMsg = new ArrayList<>();
 
-    private ArrayList<String> subAllMsg = new ArrayList<String>();
+    private ArrayList<String> subAllMsg = new ArrayList<>();
 
-    private ArrayList<String> subReadMsg = new ArrayList<String>();
+    private ArrayList<String> subReadMsg = new ArrayList<>();
 
-    private ArrayList<String> subUnreadMsg = new ArrayList<String>();
+    private ArrayList<String> subUnreadMsg = new ArrayList<>();
 
     private Account myAccount;
+
 
 
 
@@ -122,10 +123,10 @@ public class DashboardController extends Parent implements Initializable {
     {
         myAccount = SceneManager.getAccount();
         allMsg = DBConnection.getMessage(myAccount);
-        readMsg = new ArrayList<EmailMessage>();
-        unReadMsg = new ArrayList<EmailMessage>();
-        sentMsg = new ArrayList<EmailMessage>();
-        String subjectDetail = null;
+        readMsg = new ArrayList<>();
+        unReadMsg = new ArrayList<>();
+        sentMsg = new ArrayList<>();
+        String subjectDetail;
 
         for (EmailMessage m : allMsg)
         {
@@ -225,7 +226,10 @@ public class DashboardController extends Parent implements Initializable {
                         // System.out.println("Val ="+ new_val);
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
-                        currentMsg.setIsRead(1);
+                        if(myAccount.getEmail().equals(currentMsg.getToEmail()))
+                        {
+                            currentMsg.setIsRead(1);
+                        }
                         DBConnection.updateStatusMessage(currentMsg);
                         //detailPane.setText(allMsg.get(sentList.getSelectionModel().getSelectedIndex()).getBodyText());
                     }
@@ -265,21 +269,47 @@ public class DashboardController extends Parent implements Initializable {
 
     public void goReplyView(ActionEvent event){
 
-        application.editorView();
+        if(currentMsg!=null)
+        {
+            application.editorView(currentMsg,2);
+        }
     }
 
     public void goForwardView(ActionEvent event){
 
-        application.editorView();
+        if(currentMsg!=null)
+        {
+            application.editorView(currentMsg,3);
+        }
     }
     public void goNewMessageView(ActionEvent event){
 
-        application.editorView();
+        currentMsg = null;
+        application.editorView(currentMsg,1);
     }
 
     public void deleteMessage(ActionEvent event){
 
-        application.editorView();
+        if(currentMsg!=null)
+        {
+            if(myAccount.getEmail().equals(currentMsg.getToEmail()))
+            {
+                currentMsg.setIsReaderDel(1);
+                DBConnection.updateStatusMessage(currentMsg);
+            }
+            else if(myAccount.getEmail().equals(currentMsg.getFromEmail()))
+            {
+                currentMsg.setIsSenderDel(1);
+                DBConnection.updateStatusMessage(currentMsg);
+            }
+            if(currentMsg.getIsReaderDel()==1&&currentMsg.getIsSenderDel()==1)
+            {
+                ArrayList<EmailMessage> removeEmail = new ArrayList<>();
+                removeEmail.add(currentMsg);
+                DBConnection.deleteMessages(removeEmail);
+            }
+            application.dashboardView();
+        }
     }
 
     // TODO: 11/20/2017 Event close immediately
