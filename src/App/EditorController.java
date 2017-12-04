@@ -76,6 +76,8 @@ public class EditorController extends Parent implements Initializable{
     Label fromText;
     @FXML
     Label subjectText;
+    @FXML
+    Label error;
 
 
     private SceneManager application;
@@ -109,6 +111,8 @@ public class EditorController extends Parent implements Initializable{
         toAccount.prefWidthProperty().bind(toBox.widthProperty().subtract(57));
         fromAccount.prefWidthProperty().bind(fromBox.widthProperty().subtract(57));
         subject.prefWidthProperty().bind(subjectBox.widthProperty().subtract(57));
+        error.prefWidthProperty().bind(gridPane2.widthProperty().subtract(164));
+        error.setText("");
 
     }
 
@@ -166,6 +170,7 @@ public class EditorController extends Parent implements Initializable{
             if(!accountManager.checkEmail(contact))
             {
                 toAccount.setStyle("-fx-border-color:#f44336;");
+                error.setText("ERROR!! Miss contact => '"+contact+"' !!");
                 checkEmail=0;
             }
             EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
