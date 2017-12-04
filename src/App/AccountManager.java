@@ -1,32 +1,16 @@
+
+
 package App;
-import java.util.ArrayList;
-import java.util.Date;
+
 
 public class AccountManager
 {
     private  Account account = null;
 
-    public  void initialize()
-    {
-       //  account = null;
-       // accountsList = DBConnection.getAccount();
-    }
 
-
-//
-//    public ArrayList<Account> readAccount(String email)
-//    {
-//
-//    }
-//
-//    public boolean writeAccount(Account account)
-//    {
-//
-//    }
-//
     public Account login(String email,String password)
     {
-        Account temp=null;
+        Account temp;
         temp = DBConnection.getAccount(email);
         if(temp!=null)
         {
@@ -46,3 +30,5 @@ public class AccountManager
 //    }
 
 }
+
+

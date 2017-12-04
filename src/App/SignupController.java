@@ -70,6 +70,7 @@ public class SignupController extends Parent implements Initializable {
                     notice.setText("Sign Up Success!!");
                     account = new Account(email,pass,IOUtils.getDateTime());
                     DBConnection.createAccount(account);
+                    application.loginView();
                 }
             }
             else

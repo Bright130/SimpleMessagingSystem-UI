@@ -168,7 +168,7 @@ public class DashboardController extends Parent implements Initializable {
 
 
         fetchEmail();
-        detailPane.setText("noiorhiogh0iwhgfgdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n\n\n\nn\n\n\n\n\n\\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nn\\n\nn\n\n\n\n\n\n\n\n\nfffffffffffffffffffffffffgidfgj  erojojjj");
+        detailPane.setText("                                        HELLO "+myAccount.getEmail());
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
         splitPane.prefWidthProperty().bind(gridPane.widthProperty());
         detailPane.prefWidthProperty().bind(gridPane.heightProperty().subtract(30));

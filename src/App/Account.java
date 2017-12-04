@@ -1,6 +1,5 @@
 package App;
 
-import java.util.Date;
 import java.lang.String;
 
 public class Account
@@ -25,19 +24,7 @@ public class Account
         this.lastRefresh = lastRefresh;
     }
 
-
-
-    public void setEmail(String email)
-    {
-        email = IOUtils.getEmail();
-    }
-
-    public void setPassword(String password)
-    {
-        password = IOUtils.getPassword();
-    }
-
-    public void setLastUpdate(String time)
+    public void setLastUpdate()
     {
         lastRefresh = IOUtils.getDateTime();
     }

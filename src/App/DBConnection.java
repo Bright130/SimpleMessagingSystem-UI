@@ -165,7 +165,7 @@ public class DBConnection {
         ResultSet resultSet = null;
 
         try{
-            account.setLastUpdate(IOUtils.getDateTime());
+            account.setLastUpdate();
             statement = connection.createStatement();
             resultSet = statement.executeQuery( "SELECT * FROM Message WHERE  fromEmail like '"+ account.getEmail() +"' or toEmail like '"+account.getEmail()+"' ORDER BY lastModified DESC ;");
 

@@ -49,31 +49,6 @@ public class EmailMessage
         this.isSenderDel = isSenderDel;
     }
 
-    public void setLastModified(String date)
-    {
-        this.lastModified = date;
-    }
-
-    public void setToEmail(String toAddress)
-    {
-        this.toAddress = toAddress;
-    }
-
-    public void setFromEmail(String fromAddress)
-    {
-        this.fromAddress = fromAddress;
-    }
-
-    public void setSubject(String subject)
-    {
-        this.subject = subject;
-    }
-
-    public void setBodyText(String bodyText)
-    {
-        this.bodyText = bodyText;
-    }
-
     public void setIsRead(int isRead)
     {
         this.isRead = isRead;
@@ -127,12 +102,5 @@ public class EmailMessage
     {
         return isSenderDel;
     }
-
-    public boolean send()
-    {
-        return true;
-    }
-
-
 
 }

@@ -84,11 +84,9 @@ public class EditorController extends Parent implements Initializable{
 
     private EmailMessage msg;
 
-    private EmailMessage newMsg;
-
     private int order = 0;
 
-    ArrayList<EmailMessage> multiEmail = new ArrayList<EmailMessage>();
+    ArrayList<EmailMessage> multiEmail = new ArrayList<>();
 
 
 

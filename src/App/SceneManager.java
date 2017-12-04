@@ -33,9 +33,6 @@ public class SceneManager extends Application{
     private StackPane root =new StackPane();
     private GridPane pane = null;
     private static Account account = new Account();
-
-    private static DashBoard myDashBoard = null;
-
     private static AccountManager manager = new AccountManager();
 
     public void loginView()
@@ -106,7 +103,6 @@ public class SceneManager extends Application{
 
     public void dashboardView()
     {
-        //myDashBoard = new DashBoard(account);
         try{
             DashboardController dashboard = (DashboardController) changeScene("Dashboard.fxml") ;
             dashboard.setWindow(this);
@@ -131,8 +127,6 @@ public class SceneManager extends Application{
         {
             return false ;
         }
-        //myDashBoard = new DashBoard(account);
-        //myDashBoard.readEmail();*/
         dashboardView();
         return true;
     }
