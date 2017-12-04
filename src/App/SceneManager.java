@@ -1,10 +1,20 @@
+/**
+ *    SceneManager
+ *       A class that manage the scene of this program
+ *
+ *   Created by Chainarong Tumapha (Bright)  58070503409 AND
+ *              Paween Surimittragool (Jarb) 58070503457
+ *
+ *       Group BJ
+ *       24 Oct. 2017
+ */
 package App;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Group;
+
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -14,27 +24,20 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Scene;
-import javafx.scene.Group;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
 
 public class SceneManager extends Application{
+    /** Declear the interface method */
     public void start(Stage primaryStage) throws Exception {}
+    /** Stack pane to contain every pane */
     private StackPane root =new StackPane();
+    /** Grid pane to get main of frame in FXML */
     private GridPane pane = null;
+    /** Account for user */
     private static Account account = new Account();
+    /** To manage the account manager */
     private static AccountManager manager = new AccountManager();
 
+    /** A method that invoke the Login scene */
     public void loginView()
     {
         try{
@@ -48,11 +51,10 @@ public class SceneManager extends Application{
         }
 
     }
-
+    /** A method that invoke the Logout scene */
     public void logoutView()
     {
         try{
-            // TODO: 20/11/2017 Logout in AccountManager and use it here.
             LoginController login = (LoginController) changeScene("Login.fxml") ;
             login.setWindow(this);
 
@@ -62,7 +64,7 @@ public class SceneManager extends Application{
         }
 
     }
-
+    /** A method that invoke the Signup scene */
     public void signupView()
     {
         try{
@@ -76,6 +78,7 @@ public class SceneManager extends Application{
 
     }
 
+    /** A method that invoke the editor scene */
     public void editorView(EmailMessage msg,int order)
     {
         try{
@@ -101,7 +104,7 @@ public class SceneManager extends Application{
     }
 
 
-
+    /** A method that invoke the dashboard scene */
     public void dashboardView()
     {
         try{
@@ -115,12 +118,23 @@ public class SceneManager extends Application{
 
     }
 
+    /**
+     * A method that initial the window
+     * @return  the parent of login view which is root
+     */
     public Parent createWindow()
     {
         loginView();
         return root;
     }
 
+    /**
+     * A method that check the authentication
+     * @param
+     * username is username of user
+     * password is passwod of user's account
+     * @return  status of checking
+     */
     public boolean checkLogin(String username, String password)
     {
         account = manager.login(username,password);
@@ -131,7 +145,13 @@ public class SceneManager extends Application{
         dashboardView();
         return true;
     }
-
+    /**
+     * A method that check the signup and existing email
+     * @param
+     * username is username of user
+     * password is passwod of user's account
+     * @return  status of checking, true means email isn't exist
+     */
     public boolean checkSignUp(String username)
     {
         account = DBConnection.getAccount(username);
@@ -144,7 +164,11 @@ public class SceneManager extends Application{
         else
             return false;
     }
-
+    /**
+     * A method that change the scene
+     * @param filename file of FXML which is scene that need to load
+     * @return  controller
+     */
     public Initializable changeScene(String filename) throws Exception{
 
         String path = ".."+ File.separator+"FXML"+ File.separator+filename ;
@@ -165,7 +189,7 @@ public class SceneManager extends Application{
         return (Initializable) loader.getController();
 
     }
-
+    /** An account getter method */
     public static Account getAccount()
     {
         return account;
