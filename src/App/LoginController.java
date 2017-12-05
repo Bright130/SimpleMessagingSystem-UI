@@ -22,16 +22,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class LoginController extends Parent implements Initializable {
+public class LoginController extends Parent implements Initializable
+{
     @FXML
     /** Username text field */
     private TextField username;
+
     @FXML
     /** Password text field */
     private PasswordField password;
+
     @FXML
     /** Lable for display error text */
     private Label error;
+
     /** This window application */
     private SceneManager application;
 
@@ -42,7 +46,8 @@ public class LoginController extends Parent implements Initializable {
     }
     @Override
     /** An override method to initial this window */
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         error.setText("");
         username.setPromptText("Username");
         password.setPromptText("Password");
@@ -74,7 +79,8 @@ public class LoginController extends Parent implements Initializable {
     }
 
     /** Method that redirects to Signup view */
-    public void goSignupView(){
+    public void goSignupView()
+    {
 
         application.signupView();
     }

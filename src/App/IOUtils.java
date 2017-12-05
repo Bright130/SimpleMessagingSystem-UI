@@ -30,9 +30,8 @@ public class IOUtils
 
         if (!m.find()||email.trim().isEmpty())
         {
-            System.out.println("Email not valid!!");
+            System.out.println("Email is not valid!!");
             return false;
-
         }
         return true;
     }
@@ -55,7 +54,7 @@ public class IOUtils
     /**
      *  Creates and returns a string with the current date
      *  and time, to use as a time stamp.
-     * @return date/time string in the form "yyyy-mm-dd hh:mm:ss"
+     *  @return date/time string in the form "yyyy-mm-dd hh:mm:ss"
      */
     public static String getDateTime()
     {

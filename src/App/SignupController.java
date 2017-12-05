@@ -21,18 +21,23 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignupController extends Parent implements Initializable {
+public class SignupController extends Parent implements Initializable
+{
     @FXML
     /** Username text field */
     private TextField username;
+
     @FXML
     /** Password text field */
     private PasswordField password;
+
     @FXML
     /** Lable for display notification text */
     private Label notice;
+
     /** This window application */
     private SceneManager application;
+
     /** User account */
     private Account account;
 
@@ -44,7 +49,8 @@ public class SignupController extends Parent implements Initializable {
 
     @Override
     /** An override method to initial this window */
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         notice.setText("");
         username.setPromptText("Username");
         password.setPromptText("Password");
@@ -87,8 +93,8 @@ public class SignupController extends Parent implements Initializable {
     }
 
     /** Method that redirects to login view */
-    public void goLoginView(){
-
+    public void goLoginView()
+    {
         application.loginView();
     }
 }

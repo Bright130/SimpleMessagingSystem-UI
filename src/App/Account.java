@@ -19,8 +19,10 @@ public class Account
 {
     /** email of account */
     private String email;
+
     /** password of account */
     private String password;
+
     /** time of last refreshed of account */
     private String lastRefresh;
 
@@ -33,7 +35,10 @@ public class Account
     }
 
     /**
-     *  The constructor for create new email
+     *  The constructor for create new account
+     *  @param username username in account
+     *  @param password password from user in this account
+     *  @param lastRefresh Date/Time that user fetch the email
      */
     Account(String username,String password,String lastRefresh)
     {
@@ -52,6 +57,7 @@ public class Account
 
     /**
      *  Return EmailAddress of this Account
+     *  @return email(username) of this accoiunt
      */
     public String getEmail()
     {
@@ -60,6 +66,7 @@ public class Account
 
     /**
      *  Return EmailAddress of this Account
+     *  @return password of this account
      */
     public String getPassword()
     {
@@ -68,6 +75,7 @@ public class Account
 
     /**
      *  Return the last date of this Account's logout
+     *  @return last update of this account
      */
     public String getLastUpdate()
     {
@@ -76,6 +84,8 @@ public class Account
 
     /**
      *  Send the email to database
+     *  @param msg message that wants to send
+     *  @return status of this sending
      */
     public boolean sendMessage(EmailMessage msg)
     {

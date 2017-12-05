@@ -34,8 +34,10 @@ public class Main extends SceneManager
 
 
     @Override
-    /** An override method that use to start the program
-     *  @param primary stage the main state of program */
+    /**
+     * An override method that use to start the program
+     *  @param primary stage the main state of program
+     */
     public void start(Stage primaryStage) throws Exception
     {
         this.primaryStage = primaryStage;

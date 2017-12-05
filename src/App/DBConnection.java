@@ -1,6 +1,6 @@
 /*********************************************
  *  DBConnection
- *   A class that connect to SQLite database
+ *   A class that connects to SQLite database
  *   to read and write data.
  *
  *   Created by Chainarong Tumapha (Bright)  58070503409 AND
@@ -15,17 +15,22 @@ package App;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBConnection {
+public class DBConnection
+{
 
     /** Open database */
-    private static Connection openDB(){
+    private static Connection openDB()
+    {
         Connection connection = null;  /* DB connection */
-        try {
+        try
+        {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:database.db");
             connection.setAutoCommit(false);
             System.out.println("Opened database successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         }
         return connection ;
@@ -35,7 +40,8 @@ public class DBConnection {
      *  @param email email that wants to get account
      *  @return Account that will be created
      */
-    public static Account getAccount(String email) {
+    public static Account getAccount(String email)
+    {
 
         Connection connection = openDB(); /* DB connection */
         if(connection == null)
@@ -43,24 +49,28 @@ public class DBConnection {
         Account account = null;           /* Account */
         Statement statement = null;       /* Statement of sql */
         ResultSet resultSet = null;       /* Query result set */
-        try{
+        try
+        {
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery( "SELECT * FROM Account WHERE username like '"+email+"' ;");
 
-            if ( resultSet.next()) {
+            if ( resultSet.next())
+            {
 
                 account =  new Account(resultSet.getString("username"),
-                                   resultSet.getString("passwordUser"),
-                                   resultSet.getString("lastRefresh")
-                                  );
+                        resultSet.getString("passwordUser"),
+                        resultSet.getString("lastRefresh")
+                );
             }
 
             resultSet.close();
             statement.close();
             connection.close();
             System.out.println("Read successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 
         }
@@ -70,26 +80,30 @@ public class DBConnection {
      *  @param account account that wants to create
      *  @return status of create an account
      */
-    public static boolean createAccount(Account account) {
+    public static boolean createAccount(Account account)
+    {
 
         Connection connection = openDB();  /* DB connection */
         if(connection == null)
             return false;
         Statement statement = null;        /* Statement of sql */
 
-        try{
+        try
+        {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Account (username,passwordUser,lastRefresh) " +
-                                        "VALUES  ('"+account.getEmail()+"'" +
-                                                ",'"+account.getPassword()+"'" +
-                                                ",'"+account.getLastUpdate()+"');"
-                                    );
+                    "VALUES  ('"+account.getEmail()+"'" +
+                    ",'"+account.getPassword()+"'" +
+                    ",'"+account.getLastUpdate()+"');"
+            );
 
             statement.close();
             connection.commit();
             connection.close();
             System.out.println("Insert successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return false;
         }
@@ -100,7 +114,8 @@ public class DBConnection {
      *  @param account account that wants to get message
      *  @return list of email messages
      */
-    public static ArrayList<EmailMessage> getMessage(Account account) {
+    public static ArrayList<EmailMessage> getMessage(Account account)
+    {
 
         Connection connection = openDB();   /* DB connection */
         if(connection == null)
@@ -109,12 +124,14 @@ public class DBConnection {
         Statement statement = null;       /* Statement of sql */
         ResultSet resultSet = null;       /* Query result set */
 
-        try{
+        try
+        {
             account.setLastUpdate();
             statement = connection.createStatement();
             resultSet = statement.executeQuery( "SELECT * FROM Message WHERE  fromEmail like '"+ account.getEmail() +"' or toEmail like '"+account.getEmail()+"' ORDER BY lastModified DESC ;");
 
-            while ( resultSet.next()) {
+            while ( resultSet.next())
+            {
 
                 messages.add(new EmailMessage(
                         resultSet.getInt("id"),
@@ -144,7 +161,9 @@ public class DBConnection {
             connection.close();
             System.out.println("Update time successfully");
 
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 
         }
@@ -155,14 +174,16 @@ public class DBConnection {
      *  @param message message that wants to create
      *  @return status of created message
      */
-    public static boolean createMessage(EmailMessage message) {
+    public static boolean createMessage(EmailMessage message)
+    {
 
         Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
         Statement statement = null;         /* Statement of sql */
 
-        try{
+        try
+        {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Message (lastModified,toEmail,fromEmail,subject,body,isRead) " +
                     "VALUES  ('"+message.getLastModified()+"'" +
@@ -170,6 +191,8 @@ public class DBConnection {
                     ",'"+message.getFromEmail()+"'" +
                     ",'"+message.getSubject()+"'" +
                     ",'"+message.getBodyText()+"'" +
+                    ",'"+message.getIsReaderDel()+"'" +
+                    ",'"+message.getIsSenderDel()+"'" +
                     ",'"+message.getIsRead()+"');"
             );
 
@@ -177,7 +200,9 @@ public class DBConnection {
             connection.commit();
             connection.close();
             System.out.println("Insert successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return false;
         }
@@ -188,14 +213,16 @@ public class DBConnection {
      *  @param message message that wants to update
      *  @return status of updated message
      */
-    public static boolean updateStatusMessage(EmailMessage message) {
+    public static boolean updateStatusMessage(EmailMessage message)
+    {
 
         Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
         Statement statement = null;         /* Statement of sql */
 
-        try{
+        try
+        {
             statement = connection.createStatement();
             statement.executeUpdate("UPDATE Message set "+
                     "isRead = '"+message.getIsRead()+"', "+
@@ -209,7 +236,9 @@ public class DBConnection {
             connection.commit();
             connection.close();
             System.out.println("Update successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return false;
         }
@@ -220,17 +249,20 @@ public class DBConnection {
      *  @param messages message that want to delete
      *  @return status of deleting message
      */
-    public static boolean deleteMessages(ArrayList<EmailMessage> messages) {
+    public static boolean deleteMessages(ArrayList<EmailMessage> messages)
+    {
 
         Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
         Statement statement = null;         /* Statement of sql */
 
-        try{
+        try
+        {
 
             statement = connection.createStatement();
-            for (EmailMessage e: messages        ) {
+            for (EmailMessage e: messages        )
+            {
 
 
                 statement.executeUpdate("DELETE from Message " +
@@ -243,7 +275,9 @@ public class DBConnection {
             connection.commit();
             connection.close();
             System.out.println("Delete successfully");
-        } catch ( Exception e ) {
+        }
+        catch ( Exception e )
+        {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             return false;
         }

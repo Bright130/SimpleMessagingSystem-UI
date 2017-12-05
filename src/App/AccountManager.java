@@ -16,8 +16,8 @@ package App;
 
 public class AccountManager
 {
+    /** User's account */
     private  Account account = null;
-
 
     /**
      * Check the email that correctly following the pattern form should be 8-12 character
