@@ -116,7 +116,17 @@ public class DashboardController extends Parent implements Initializable {
 
         for (EmailMessage m : allMsg)
         {
-            if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
+            if(myAccount.getEmail().equals(m.getFromEmail())&&m.getFromEmail().equals(m.getToEmail()))
+            {
+                subjectDetail="";
+                unReadMsg.add(m);
+                subjectDetail+="Send : "+m.getToEmail();
+                subjectDetail+="\n"+m.getSubject();
+                subjectDetail+="\n"+m.getLastModified();
+                subUnreadMsg.add(subjectDetail);
+                subAllMsg.add(subjectDetail);
+            }
+            else if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 subjectDetail="";
                 unReadMsg.add(m);
@@ -163,6 +173,10 @@ public class DashboardController extends Parent implements Initializable {
         generateEmailListUnread(unreadList,subUnreadMsg,unReadMsg);
         generateEmailList(readList,subReadMsg,readMsg);
         generateEmailList(sentList,subSentMsg,sentMsg);
+        unread.setText("Unread("+subUnreadMsg.size()+")");
+        all.setText("All("+subAllMsg.size()+")");
+        read.setText("Read("+subReadMsg.size()+")");
+        sent.setText("Sent("+subSentMsg.size()+")");
     }
 
     private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg ){
@@ -209,6 +223,10 @@ public class DashboardController extends Parent implements Initializable {
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
                         if(myAccount.getEmail().equals(currentMsg.getToEmail()))
+                        {
+                            currentMsg.setIsRead(1);
+                        }
+                        if(currentMsg.getFromEmail().equals(currentMsg.getToEmail()))
                         {
                             currentMsg.setIsRead(1);
                         }
@@ -277,7 +295,13 @@ public class DashboardController extends Parent implements Initializable {
 
         if(currentMsg!=null)
         {
-            if(myAccount.getEmail().equals(currentMsg.getToEmail()))
+            if(currentMsg.getFromEmail().equals(currentMsg.getToEmail()))
+            {
+                ArrayList<EmailMessage> removeEmail = new ArrayList<>();
+                removeEmail.add(currentMsg);
+                DBConnection.deleteMessages(removeEmail);
+            }
+            else if(myAccount.getEmail().equals(currentMsg.getToEmail()))
             {
                 currentMsg.setIsReaderDel(1);
                 DBConnection.updateStatusMessage(currentMsg);

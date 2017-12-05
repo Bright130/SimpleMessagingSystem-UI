@@ -66,10 +66,11 @@ public class SceneManager extends Application{
     public void editorView(EmailMessage msg,int order)
     {
         try{
+
             EditorController editor = (EditorController) changeScene("Editor.fxml") ;
             editor.setAccountManager(manager);
             editor.setAccount(account);
-            editor.setOrder(order);
+
             if(order>1)
             {
                 editor.setMsg(msg);
@@ -78,6 +79,8 @@ public class SceneManager extends Application{
                     editor.setToAccount(msg.getFromEmail());
                 }
             }
+
+            editor.setOrder(order);
             editor.setWindow(this);
 
         }catch (Exception e)

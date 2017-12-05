@@ -108,47 +108,6 @@ public class EditorController extends Parent implements Initializable{
     public void sendMessage(){
 
         int checkEmail=1; /* boolean for validate to email */
-
-        /*
-         * If order > 1 it mean this program will do reply or forward
-         * before send new email it will write old message
-         */
-        if(order>1)
-        {
-            String originalMessage = body.getText();
-            if(order==2)
-            {
-                toAccount.setText(msg.getFromEmail());
-                originalMessage+="\n\n-------------------Original message----------------------";
-                originalMessage+="\nFrom : ";
-                originalMessage+=msg.getFromEmail();
-                originalMessage+="\nDate : ";
-                originalMessage+=msg.getLastModified();
-                originalMessage+="\nSubject  : ";
-                originalMessage+=msg.getSubject();
-                originalMessage+="\nTo   : ";
-                originalMessage+=msg.getToEmail();
-                originalMessage+="\n\n";
-                originalMessage+=msg.getBodyText();
-                body.setText(originalMessage);
-            }
-            else if(order==3)
-            {
-                originalMessage+="\n\n-------------------Forwarded message----------------------";
-                originalMessage+="\nFrom : ";
-                originalMessage+=msg.getFromEmail();
-                originalMessage+="\nDate : ";
-                originalMessage+=msg.getLastModified();
-                originalMessage+="\nSubject  : ";
-                originalMessage+=msg.getSubject();
-                originalMessage+="\nTo   : ";
-                originalMessage+=msg.getToEmail();
-                originalMessage+="\n\n";
-                originalMessage+=msg.getBodyText();
-                body.setText(originalMessage);
-            }
-        }
-
         String allContact = toAccount.getText();       /* every to email address */
         String fields[] = allContact.split(",");  /* each to email address */
 
@@ -240,7 +199,41 @@ public class EditorController extends Parent implements Initializable{
      */
     public void setOrder(int order)
     {
+        String originalMessage = body.getText();
         this.order = order;
+        if(order==2)
+        {
+            subject.setText("RE:"+msg.getSubject());
+            toAccount.setText(msg.getFromEmail());
+            originalMessage+="\n\n\n-------------------Original message----------------------";
+            originalMessage+="\nFrom : ";
+            originalMessage+=msg.getFromEmail();
+            originalMessage+="\nDate : ";
+            originalMessage+=msg.getLastModified();
+            originalMessage+="\nSubject  : ";
+            originalMessage+=msg.getSubject();
+            originalMessage+="\nTo   : ";
+            originalMessage+=msg.getToEmail();
+            originalMessage+="\n\n";
+            originalMessage+=msg.getBodyText();
+            body.setText(originalMessage);
+        }
+        else if(order==3)
+        {
+            subject.setText("FW:"+msg.getSubject());
+            originalMessage+="\n\n\n-------------------Forwarded message----------------------";
+            originalMessage+="\nFrom : ";
+            originalMessage+=msg.getFromEmail();
+            originalMessage+="\nDate : ";
+            originalMessage+=msg.getLastModified();
+            originalMessage+="\nSubject  : ";
+            originalMessage+=msg.getSubject();
+            originalMessage+="\nTo   : ";
+            originalMessage+=msg.getToEmail();
+            originalMessage+="\n\n";
+            originalMessage+=msg.getBodyText();
+            body.setText(originalMessage);
+        }
     }
 
     /**
