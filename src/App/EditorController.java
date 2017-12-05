@@ -117,6 +117,7 @@ public class EditorController extends Parent implements Initializable{
 
         String text;                                    /* text in text field */
 
+        EmailMessage msg;
         multiEmail.clear();
 
         /*
@@ -129,6 +130,10 @@ public class EditorController extends Parent implements Initializable{
             error.setText("ERROR!! Miss ToAccount");
             checkEmail=0;
         }
+        else
+        {
+            toAccount.setStyle("-fx-border-color:none;");
+        }
         text=subject.getText();
         if(text.trim().isEmpty())
         {
@@ -136,12 +141,20 @@ public class EditorController extends Parent implements Initializable{
             error.setText("ERROR!! Miss subject");
             checkEmail=0;
         }
+        else
+        {
+            subject.setStyle("-fx-border-color:none;");
+        }
         text=body.getText();
         if(text.trim().isEmpty())
         {
             body.setStyle("-fx-border-color:#f44336;");
             error.setText("ERROR!! Miss body");
             checkEmail=0;
+        }
+        else
+        {
+            body.setStyle("-fx-border-color:none;");
         }
         if(checkEmail==1)
         {
@@ -154,8 +167,19 @@ public class EditorController extends Parent implements Initializable{
                     checkEmail=0;
                     break;
                 }
-                EmailMessage msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
-                multiEmail.add(msg);
+
+                if(contact.equals(account.getEmail()))
+                {
+                    msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,1,0);
+                    multiEmail.add(msg);
+                    msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),1,0,1);
+                    multiEmail.add(msg);
+                }
+                else
+                {
+                    msg = new EmailMessage(IOUtils.getDateTime(),contact,account.getEmail(),subject.getText(),body.getText(),0,0,0);
+                    multiEmail.add(msg);
+                }
             }
         }
 
