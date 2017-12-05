@@ -85,7 +85,6 @@ public class SceneManager extends Application{
             EditorController ecitor = (EditorController) changeScene("Editor.fxml") ;
             ecitor.setAccountManager(manager);
             ecitor.setAccount(account);
-            ecitor.setOrder(order);
             if(order>1)
             {
                 ecitor.setMsg(msg);
@@ -94,6 +93,7 @@ public class SceneManager extends Application{
                     ecitor.setToAccount(msg.getFromEmail());
                 }
             }
+            ecitor.setOrder(order);
             ecitor.setWindow(this);
 
         }catch (Exception e)

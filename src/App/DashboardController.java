@@ -131,7 +131,17 @@ public class DashboardController extends Parent implements Initializable {
 
         for (EmailMessage m : allMsg)
         {
-            if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
+            if(myAccount.getEmail().equals(m.getFromEmail())&&m.getFromEmail().equals(m.getToEmail()))
+            {
+                subjectDetail="";
+                sentMsg.add(m);
+                subjectDetail+="Send : "+m.getToEmail();
+                subjectDetail+="\n"+m.getSubject();
+                subjectDetail+="\n"+m.getLastModified();
+                subSentMsg.add(subjectDetail);
+                subAllMsg.add(subjectDetail);
+            }
+            else if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
                 subjectDetail="";
                 unReadMsg.add(m);
@@ -227,6 +237,10 @@ public class DashboardController extends Parent implements Initializable {
                         {
                             currentMsg.setIsRead(1);
                         }
+                        if(currentMsg.getFromEmail().equals(currentMsg.getToEmail()))
+                        {
+                            currentMsg.setIsRead(1);
+                        }
                         DBConnection.updateStatusMessage(currentMsg);
                     }
                 });
@@ -292,7 +306,13 @@ public class DashboardController extends Parent implements Initializable {
 
         if(currentMsg!=null)
         {
-            if(myAccount.getEmail().equals(currentMsg.getToEmail()))
+            if(currentMsg.getFromEmail().equals(currentMsg.getToEmail()))
+            {
+                ArrayList<EmailMessage> removeEmail = new ArrayList<>();
+                removeEmail.add(currentMsg);
+                DBConnection.deleteMessages(removeEmail);
+            }
+            else if(myAccount.getEmail().equals(currentMsg.getToEmail()))
             {
                 currentMsg.setIsReaderDel(1);
                 DBConnection.updateStatusMessage(currentMsg);
