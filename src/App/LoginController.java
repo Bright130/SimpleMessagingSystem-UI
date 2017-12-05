@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +38,9 @@ public class LoginController extends Parent implements Initializable
     /** Lable for display error text */
     private Label error;
 
+    @FXML
+    private GridPane mainPane;
+
     /** This window application */
     private SceneManager application;
 
@@ -51,6 +56,7 @@ public class LoginController extends Parent implements Initializable
         error.setText("");
         username.setPromptText("Username");
         password.setPromptText("Password");
+
     }
 
     /** Method that checks the authentication */

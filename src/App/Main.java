@@ -32,6 +32,16 @@ public class Main extends SceneManager
         primaryStage.setTitle("BJ Simple Messaging"+text);
     }
 
+    /**
+     * Set minimum size of window
+     * @param width minimum width
+     * @param height minimum height
+     */
+    public static void setMinWindow(double width,double height)
+    {
+        primaryStage.setMinWidth(width);
+        primaryStage.setMinHeight(height);
+    }
 
     @Override
     /**

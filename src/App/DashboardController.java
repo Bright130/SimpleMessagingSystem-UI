@@ -24,7 +24,6 @@ import javafx.scene.layout.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,45 +32,54 @@ import javafx.util.Callback;
 
 public class DashboardController extends Parent implements Initializable
 {
-    /** Group of tabs in each category */
-    @FXML
-    Tab all;
-    @FXML
-    Tab unread;
-    @FXML
-    Tab read;
-    @FXML
-    Tab sent;
 
-    /** Group of list view in each category */
     @FXML
-    ListView<String> allList = new ListView<>();
+    /** tab in all category */
+    private Tab all;
+
     @FXML
-    ListView<String> unreadList = new ListView<>();
+    /** tab in unread category */
+    private Tab unread;
+
     @FXML
-    ListView<String> readList = new ListView<>();
+    /** tab in read category */
+    private Tab read;
+
     @FXML
-    ListView<String> sentList = new ListView<>();
+    /** tab in sent category */
+    private Tab sent;
+
+    @FXML
+    /** list view in all category */
+    private ListView<String> allList = new ListView<>();
+
+    @FXML
+    /** list view in unread category */
+    private ListView<String> unreadList = new ListView<>();
+
+    @FXML
+    /** list view in read category */
+    private ListView<String> readList = new ListView<>();
+
+    @FXML
+    /** list view in sent category */
+    private ListView<String> sentList = new ListView<>();
 
     @FXML
     /** Display detail of email pane */
-            TextArea detailPane;
+    private TextArea detailPane;
 
     @FXML
     /** Split pane */
-            SplitPane splitPane;
+    private SplitPane splitPane;
 
     @FXML
     /** Grid pane for main program */
-            GridPane gridPane;
+    private GridPane gridPane;
 
     @FXML
     /** Scroll pane that contain detail in email */
-            ScrollPane scrollPane;
-
-    @FXML
-    /** right box that contains many button */
-            VBox rightBox;
+    private ScrollPane scrollPane;
 
     /** This window application */
     private SceneManager application;
@@ -223,13 +231,13 @@ public class DashboardController extends Parent implements Initializable
         read.setText("Read("+subReadMsg.size()+")");
         sent.setText("Sent("+subSentMsg.size()+")");
     }
-    
+
     /**
      *  Generate the list of email
      *  @param listView list view id name in FXML
      *  @param subMsg header messages
      *  @param msg messages in the category
-     * */
+     */
     private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg )
     {
         ObservableList<String> data = FXCollections.observableArrayList(subMsg);
@@ -249,6 +257,7 @@ public class DashboardController extends Parent implements Initializable
         listView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>()
                 {
+                    @Override
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val)
                     {

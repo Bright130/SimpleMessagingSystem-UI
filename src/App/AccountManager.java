@@ -57,6 +57,12 @@ public class AccountManager
         return false;
     }
 
+    /**
+     * Create the account that available in database
+     * @param   email     email of account
+     * @param   pass      password of account
+     * @return if the program can create an account it will return true but return false
+     */
     public static boolean createAccount(String email,String pass)
     {
         return DBConnection.createAccount(new Account(email,pass,IOUtils.getDateTime()));

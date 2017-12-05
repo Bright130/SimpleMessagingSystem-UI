@@ -38,6 +38,7 @@ public class SceneManager extends Application
         try
         {
             Main.addMoreTitleText("");
+            Main.setMinWindow(300,300);
             LoginController login = (LoginController) changeScene("Login.fxml") ;
             login.setWindow(this);
 
@@ -60,6 +61,7 @@ public class SceneManager extends Application
         try
         {
             Main.addMoreTitleText("");
+            Main.setMinWindow(300,300);
             SignupController signup = (SignupController) changeScene("Signup.fxml") ;
             signup.setWindow(this);
 
@@ -83,8 +85,8 @@ public class SceneManager extends Application
     {
         try
         {
-
             EditorController editor = (EditorController) changeScene("Editor.fxml") ;
+            Main.setMinWindow(400,240);
             editor.setAccountManager(manager);
             editor.setAccount(account);
 
@@ -115,6 +117,7 @@ public class SceneManager extends Application
         try
         {
             Main.addMoreTitleText(" : Hello! "+account.getEmail());
+            Main.setMinWindow(700,350);
             DashboardController dashboard = (DashboardController) changeScene("Dashboard.fxml") ;
 
             dashboard.setWindow(this);

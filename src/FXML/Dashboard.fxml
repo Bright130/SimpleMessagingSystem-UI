@@ -36,7 +36,7 @@
    <children>
       <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="492.0" prefWidth="891.0" style="-fx-background-color: #263238;">
         <items>
-            <GridPane minWidth="250.0">
+            <GridPane minWidth="200.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -110,7 +110,7 @@
                   </TabPane>
                </children>
             </GridPane>
-            <GridPane minHeight="100.0" minWidth="430.0">
+            <GridPane minHeight="100.0" minWidth="450.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -126,7 +126,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <VBox fx:id="rightBox" prefHeight="300.0" prefWidth="439.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                        <VBox prefHeight="300.0" prefWidth="439.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                            <children>
                               <HBox alignment="CENTER" prefHeight="60.0" prefWidth="439.0" style="-fx-background-color: #263238;">
                                  <children>

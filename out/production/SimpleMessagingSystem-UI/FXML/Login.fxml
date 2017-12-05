@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-image: url(&quot;/IMG/homeBG.png&quot;);" stylesheets="@../CSS/home.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
+<GridPane fx:id="mainPane" alignment="CENTER" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-image: url(&quot;/IMG/homeBG.png&quot;);" stylesheets="@../CSS/home.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
