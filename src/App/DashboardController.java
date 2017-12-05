@@ -21,7 +21,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextArea;
 
 import java.net.URL;
@@ -76,12 +75,13 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     VBox rightBox;
 
-    /**
-     *  The member variables.
-     */
 
+    /** This window application */
     private SceneManager application;
 
+    /**
+     *  The Group of variables that store message in each categories
+     */
     private ArrayList<EmailMessage> allMsg;
 
     private ArrayList<EmailMessage> readMsg;
@@ -90,8 +90,11 @@ public class DashboardController extends Parent implements Initializable {
 
     private ArrayList<EmailMessage> sentMsg;
 
-    private EmailMessage currentMsg;
 
+
+    /**
+     *  The Group of variables that store subtitle of messages in each categories
+     */
     private ArrayList<String> subSentMsg = new ArrayList<>();
 
     private ArrayList<String> subAllMsg = new ArrayList<>();
@@ -100,11 +103,14 @@ public class DashboardController extends Parent implements Initializable {
 
     private ArrayList<String> subUnreadMsg = new ArrayList<>();
 
+    /** User's account */
     private Account myAccount;
 
+    /** Current message that user views */
+    private EmailMessage currentMsg;
 
 
-
+    /** setter method for window application */
     public void setWindow(SceneManager application)
     {
         this.application = application ;
@@ -159,9 +165,8 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     @Override
+    /** An override method to initial this window */
     public void initialize(URL location, ResourceBundle resources) {
-
-
         fetchEmail();
         detailPane.setText("                                        HELLO "+myAccount.getEmail());
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
@@ -192,11 +197,9 @@ public class DashboardController extends Parent implements Initializable {
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val) {
-                        // System.out.println("Val ="+ new_val);
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
-                        //detailPane.setText(allMsg.get(sentList.getSelectionModel().getSelectedIndex()).getBodyText());
-                    }
+                   }
                 });
 
     }
@@ -218,7 +221,6 @@ public class DashboardController extends Parent implements Initializable {
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val) {
-                        // System.out.println("Val ="+ new_val);
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
                         if(myAccount.getEmail().equals(currentMsg.getToEmail()))
@@ -226,14 +228,13 @@ public class DashboardController extends Parent implements Initializable {
                             currentMsg.setIsRead(1);
                         }
                         DBConnection.updateStatusMessage(currentMsg);
-                        //detailPane.setText(allMsg.get(sentList.getSelectionModel().getSelectedIndex()).getBodyText());
                     }
                 });
 
     }
 
     /**
-     * Check the email that correctly following the pattern form should be 8-12 character
+     * Get the detail of the message
      * @param   email   EmailMessage that hold the information
      * @return true String about information of email for show in the board
      */
@@ -253,22 +254,10 @@ public class DashboardController extends Parent implements Initializable {
         return textUI;
     }
 
-    static class EmailCardCell extends ListCell<String> {
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            Label label = new Label(item);
-            if (item != null) {
-                setGraphic(label);
-            }
-        }
-    }
-
-
     /**
      *  Send email that want to reply and order for reply method
      */
-    public void goReplyView(ActionEvent event){
+    public void goReplyView(){
 
         if(currentMsg!=null)
         {
@@ -279,7 +268,7 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Send email that want to forward and order for forward method
      */
-    public void goForwardView(ActionEvent event){
+    public void goForwardView(){
 
         if(currentMsg!=null)
         {
@@ -290,7 +279,7 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Send order for NewMessage method
      */
-    public void goNewMessageView(ActionEvent event){
+    public void goNewMessageView(){
 
         currentMsg = null;
         application.editorView(currentMsg,1);
@@ -299,7 +288,7 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Delete the current email that user select
      */
-    public void deleteMessage(ActionEvent event){
+    public void deleteMessage(){
 
         if(currentMsg!=null)
         {
@@ -323,13 +312,18 @@ public class DashboardController extends Parent implements Initializable {
         }
     }
 
-    public void goLogoutView(ActionEvent event){
+    /**
+     *  Method that redirects to login view
+     */
+    public void goLogoutView(){
 
        application.logoutView();
     }
 
-    // TODO: 11/20/2017  Update refresh time in account
-    public void goDashboardView(ActionEvent event){
+    /**
+     *  Method that redirects to dashboard view
+     */
+    public void goDashboardView(){
 
         application.dashboardView();
     }

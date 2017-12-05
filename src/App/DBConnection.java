@@ -17,8 +17,9 @@ import java.util.ArrayList;
 
 public class DBConnection {
 
+    /** Open database */
     private static Connection openDB(){
-        Connection connection = null;
+        Connection connection = null;  /* DB connection */
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:database.db");
@@ -30,14 +31,18 @@ public class DBConnection {
         return connection ;
     }
 
+    /** Get account from specific email
+     *  @param email email that wants to get account
+     *  @return Account that will be created
+     */
     public static Account getAccount(String email) {
 
-        Connection connection = openDB();
+        Connection connection = openDB(); /* DB connection */
         if(connection == null)
             return null;
-        Account account = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Account account = null;           /* Account */
+        Statement statement = null;       /* Statement of sql */
+        ResultSet resultSet = null;       /* Query result set */
         try{
             statement = connection.createStatement();
 
@@ -61,13 +66,16 @@ public class DBConnection {
         }
         return account;
     }
-
+    /** Create account
+     *  @param account account that wants to create
+     *  @return status of create an account
+     */
     public static boolean createAccount(Account account) {
 
-        Connection connection = openDB();
+        Connection connection = openDB();  /* DB connection */
         if(connection == null)
             return false;
-        Statement statement = null;
+        Statement statement = null;        /* Statement of sql */
 
         try{
             statement = connection.createStatement();
@@ -88,14 +96,18 @@ public class DBConnection {
         return true;
     }
 
+    /** Get message from specific account
+     *  @param account account that wants to get message
+     *  @return list of email messages
+     */
     public static ArrayList<EmailMessage> getMessage(Account account) {
 
-        Connection connection = openDB();
+        Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return null;
         ArrayList<EmailMessage> messages = new ArrayList<EmailMessage>();
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement = null;       /* Statement of sql */
+        ResultSet resultSet = null;       /* Query result set */
 
         try{
             account.setLastUpdate();
@@ -139,12 +151,16 @@ public class DBConnection {
         return messages;
     }
 
+    /** create message and send to that account
+     *  @param message message that wants to create
+     *  @return status of created message
+     */
     public static boolean createMessage(EmailMessage message) {
 
-        Connection connection = openDB();
+        Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
-        Statement statement = null;
+        Statement statement = null;         /* Statement of sql */
 
         try{
             statement = connection.createStatement();
@@ -168,12 +184,16 @@ public class DBConnection {
         return true;
     }
 
+    /** update status of message
+     *  @param message message that wants to update
+     *  @return status of updated message
+     */
     public static boolean updateStatusMessage(EmailMessage message) {
 
-        Connection connection = openDB();
+        Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
-        Statement statement = null;
+        Statement statement = null;         /* Statement of sql */
 
         try{
             statement = connection.createStatement();
@@ -196,12 +216,16 @@ public class DBConnection {
         return true;
     }
 
+    /** Delete message
+     *  @param messages message that want to delete
+     *  @return status of deleting message
+     */
     public static boolean deleteMessages(ArrayList<EmailMessage> messages) {
 
-        Connection connection = openDB();
+        Connection connection = openDB();   /* DB connection */
         if(connection == null)
             return false;
-        Statement statement = null;
+        Statement statement = null;         /* Statement of sql */
 
         try{
 
