@@ -70,6 +70,8 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  The Group of variables that store message in each categories
      */
+    private ArrayList<EmailMessage> rawMsg;
+
     private ArrayList<EmailMessage> allMsg;
 
     private ArrayList<EmailMessage> readMsg;
@@ -108,13 +110,14 @@ public class DashboardController extends Parent implements Initializable {
     {
         myAccount = SceneManager.getAccount();
         myAccount.setLastUpdate();
-        allMsg = DBConnection.getMessage(myAccount);
+        rawMsg = DBConnection.getMessage(myAccount);
+        allMsg = new ArrayList<>();
         readMsg = new ArrayList<>();
         unReadMsg = new ArrayList<>();
         sentMsg = new ArrayList<>();
         String subjectDetail;
 
-        for (EmailMessage m : allMsg)
+        for (EmailMessage m : rawMsg)
         {
             if(myAccount.getEmail().equals(m.getFromEmail())&&m.getFromEmail().equals(m.getToEmail()))
             {
@@ -127,6 +130,7 @@ public class DashboardController extends Parent implements Initializable {
                     subjectDetail+="\n"+m.getLastModified();
                     subUnreadMsg.add(subjectDetail);
                     subAllMsg.add(subjectDetail);
+                    allMsg.add(m);
                 }
                 else if(m.getIsRead()==1)
                 {
@@ -139,6 +143,7 @@ public class DashboardController extends Parent implements Initializable {
                         subjectDetail+="\n"+m.getLastModified();
                         subSentMsg.add(subjectDetail);
                         subAllMsg.add(subjectDetail);
+                        allMsg.add(m);
                     }
                     else if(m.getIsSenderDel()==1)
                     {
@@ -149,6 +154,7 @@ public class DashboardController extends Parent implements Initializable {
                         subjectDetail+="\n"+m.getLastModified();
                         subReadMsg.add(subjectDetail);
                         subAllMsg.add(subjectDetail);
+                        allMsg.add(m);
                     }
                 }
             }
@@ -161,6 +167,7 @@ public class DashboardController extends Parent implements Initializable {
                 subjectDetail+="\n"+m.getLastModified();
                 subUnreadMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
+                allMsg.add(m);
             }
             else if(m.getIsRead()==1&&m.getIsReaderDel()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
@@ -171,6 +178,7 @@ public class DashboardController extends Parent implements Initializable {
                 subjectDetail+="\n"+m.getLastModified();
                 subReadMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
+                allMsg.add(m);
             }
             else if(myAccount.getEmail().equals(m.getFromEmail())&&m.getIsSenderDel()==0)
             {
@@ -181,6 +189,7 @@ public class DashboardController extends Parent implements Initializable {
                 subjectDetail+="\n"+m.getLastModified();
                 subSentMsg.add(subjectDetail);
                 subAllMsg.add(subjectDetail);
+                allMsg.add(m);
             }
         }
     }
