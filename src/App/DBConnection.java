@@ -185,7 +185,7 @@ public class DBConnection
         try
         {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Message (lastModified,toEmail,fromEmail,subject,body,isRead) " +
+            statement.executeUpdate("INSERT INTO Message (lastModified,toEmail,fromEmail,subject,body,isReaderDel,isSenderDel,isRead) " +
                     "VALUES  ('"+message.getLastModified()+"'" +
                     ",'"+message.getToEmail()+"'" +
                     ",'"+message.getFromEmail()+"'" +
