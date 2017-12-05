@@ -13,6 +13,7 @@ package App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
@@ -22,8 +23,6 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 
 public class EditorController extends Parent implements Initializable{
-
-
     @FXML
     /** Text field for typing to Account */
     private TextField toAccount;
@@ -43,6 +42,8 @@ public class EditorController extends Parent implements Initializable{
     /** Grid pane for main scene */
     private GridPane gridPaneScene;
     @FXML
+    private HBox titleBox;
+    @FXML
     /** A frame of from account */
     private HBox fromBox;
     @FXML
@@ -54,6 +55,8 @@ public class EditorController extends Parent implements Initializable{
     @FXML
     /** Label of error */
     private Label error;
+    @FXML
+    private ScrollPane scrollPane;
 
     /** This window application */
     private SceneManager application;
@@ -84,7 +87,8 @@ public class EditorController extends Parent implements Initializable{
 
         gridPaneScene.prefHeightProperty().bind(gridPane.heightProperty());
         gridPaneScene.prefWidthProperty().bind(gridPane.widthProperty());
-        body.prefHeightProperty().bind(gridPaneScene.heightProperty().subtract(107));
+        scrollPane.prefHeightProperty().bind(gridPaneScene.heightProperty().subtract(toBox.heightProperty()).subtract(fromBox.heightProperty()).subtract(titleBox.heightProperty()).subtract(subjectBox.prefHeightProperty()).subtract(28));
+        body.prefHeightProperty().bind(gridPaneScene.heightProperty().subtract(toBox.heightProperty()).subtract(fromBox.heightProperty()).subtract(titleBox.heightProperty()).subtract(subjectBox.prefHeightProperty()).subtract(30));
         body.prefWidthProperty().bind(gridPaneScene.widthProperty().subtract(2));
 
         toAccount.prefWidthProperty().bind(toBox.widthProperty().subtract(57));

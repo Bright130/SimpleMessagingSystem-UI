@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.util.Callback;
 
-public class DashboardController extends Parent implements Initializable {
+public class DashboardController extends Parent implements Initializable
+{
     /** Group of tabs in each category */
     @FXML
     Tab all;
@@ -41,6 +42,7 @@ public class DashboardController extends Parent implements Initializable {
     Tab read;
     @FXML
     Tab sent;
+
     /** Group of list view in each category */
     @FXML
     ListView<String> allList = new ListView<>();
@@ -50,23 +52,30 @@ public class DashboardController extends Parent implements Initializable {
     ListView<String> readList = new ListView<>();
     @FXML
     ListView<String> sentList = new ListView<>();
+
     @FXML
     /** Display detail of email pane */
-    TextArea detailPane;
+            TextArea detailPane;
+
     @FXML
     /** Split pane */
-    SplitPane splitPane;
+            SplitPane splitPane;
+
     @FXML
     /** Grid pane for main program */
-    GridPane gridPane;
+            GridPane gridPane;
+
     @FXML
     /** Scroll pane that contain detail in email */
-    ScrollPane scrollPane;
+            ScrollPane scrollPane;
+
     @FXML
     /** right box that contains many button */
-    VBox rightBox;
+            VBox rightBox;
+
     /** This window application */
     private SceneManager application;
+
     /**
      *  The Group of variables that store message in each categories
      */
@@ -196,7 +205,8 @@ public class DashboardController extends Parent implements Initializable {
 
     @Override
     /** An override method to initial this window */
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         fetchEmail();
         detailPane.setText("                                        HELLO "+myAccount.getEmail());
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
@@ -214,47 +224,68 @@ public class DashboardController extends Parent implements Initializable {
         sent.setText("Sent("+subSentMsg.size()+")");
     }
 
-    private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg ){
-        ObservableList<String> data = FXCollections.observableArrayList(subMsg);
+    /**
+     *  Generate the list of email
+     *  @param listView list view id name in FXML
+     *  @param subMsg header messages
+     *  @param msg messages in the category
+     * */
+    private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg )
+    {
+        ObservableList<String> data = FXCollections.observableArrayList(subMsg);  /* header messages */
         listView.getSelectionModel();
         listView.setItems(data);
         listView.setCellFactory(new Callback<ListView<String>,
-                                        ListCell<String>>() {
+                                        ListCell<String>>()
+                                {
                                     @Override
-                                    public ListCell<String> call(ListView<String> list) {
+                                    public ListCell<String> call(ListView<String> list)
+                                    {
                                         return new EmailCardCell();
                                     }
                                 }
         );
 
         listView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
+                new ChangeListener<String>()
+                {
                     public void changed(ObservableValue<? extends String> ov,
-                                        String old_val, String new_val) {
+                                        String old_val, String new_val)
+                    {
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
-                   }
+                    }
                 });
 
     }
-
-    private void generateEmailListUnread( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg ){
+    /**
+     *  Generate the list of email only unread category and once email was read, it's also update read status
+     *  @param listView list view id name in FXML
+     *  @param subMsg header messages
+     *  @param msg messages in the category
+     * */
+    private void generateEmailListUnread( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg )
+    {
         ObservableList<String> data = FXCollections.observableArrayList(subMsg);
         listView.getSelectionModel();
         listView.setItems(data);
         listView.setCellFactory(new Callback<ListView<String>,
-                                        ListCell<String>>() {
+                                        ListCell<String>>()
+                                {
                                     @Override
-                                    public ListCell<String> call(ListView<String> list) {
+                                    public ListCell<String> call(ListView<String> list)
+                                    {
                                         return new EmailCardCell();
                                     }
                                 }
         );
 
         listView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
+                new ChangeListener<String>()
+                {
                     public void changed(ObservableValue<? extends String> ov,
-                                        String old_val, String new_val) {
+                                        String old_val, String new_val)
+                    {
                         currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
                         detailPane.setText(getDetailMessage(currentMsg));
                         if(myAccount.getEmail().equals(currentMsg.getToEmail()))
@@ -295,8 +326,8 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Send email that want to reply and order for reply method and go to editor
      */
-    public void goReplyView(){
-
+    public void goReplyView()
+    {
         if(currentMsg!=null)
         {
             application.editorView(currentMsg,2);
@@ -306,8 +337,8 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Send email that want to forward and order for forward method and go to editor
      */
-    public void goForwardView(){
-
+    public void goForwardView()
+    {
         if(currentMsg!=null)
         {
             application.editorView(currentMsg,3);
@@ -317,7 +348,8 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Send order for NewMessage method and go to editor
      */
-    public void goNewMessageView(){
+    public void goNewMessageView()
+    {
 
         currentMsg = null;
         application.editorView(currentMsg,1);
@@ -326,8 +358,8 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Delete the current email that user select and refresh
      */
-    public void deleteMessage(){
-
+    public void deleteMessage()
+    {
         if(currentMsg!=null)
         {
             if(currentMsg.getFromEmail().equals(currentMsg.getToEmail()))
@@ -359,16 +391,16 @@ public class DashboardController extends Parent implements Initializable {
     /**
      *  Method that redirects to login view
      */
-    public void goLogoutView(){
-
-       application.logoutView();
+    public void goLogoutView()
+    {
+        application.logoutView();
     }
 
     /**
      *  Method that redirects to dashboard view
      */
-    public void goDashboardView(){
-
+    public void goDashboardView()
+    {
         application.dashboardView();
     }
 }
