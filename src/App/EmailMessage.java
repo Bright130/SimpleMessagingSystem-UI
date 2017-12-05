@@ -36,10 +36,6 @@ public class EmailMessage
 
     private int isReaderDel;
 
-    EmailMessage()
-    {
-    }
-
     /**
      *  The constructor for create new email
      */

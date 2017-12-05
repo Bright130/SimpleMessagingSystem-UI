@@ -171,7 +171,7 @@ public class SceneManager extends Application{
      */
     public Initializable changeScene(String filename) throws Exception{
 
-        String path = ".."+ File.separator+"FXML"+ File.separator+filename ;
+        String path = ".."+ File.separator+"FXML"+ File.separator+filename ;  /* file path */
         InputStream file = getClass().getResourceAsStream(path);
         FXMLLoader loader = new FXMLLoader();
         loader.setBuilderFactory(new JavaFXBuilderFactory());

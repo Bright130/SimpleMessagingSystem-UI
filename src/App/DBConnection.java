@@ -3,8 +3,11 @@
  *   A class that connect to SQLite database
  *   to read and write data.
  *
- *   Created by Chainarong Tumapha (Bright) 58070503409
- *     11 November 2017
+ *   Created by Chainarong Tumapha (Bright)  58070503409 AND
+ *              Paween Surimittragool (Jarb) 58070503457
+ *
+ *       Group BJ
+ *       11 Nov. 2017
  *
  */
 package App;
@@ -12,21 +15,7 @@ package App;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 public class DBConnection {
-
-    /**  Tester  **/
-    public static void main(String[] args) {
-        Account b = getAccount("bbb@b.com");
-        ArrayList<EmailMessage> messages = getMessage(b);
-        for (EmailMessage m : messages) {
-            System.out.println("m.getSubject() = " + m.getSubject());
-            System.out.print("m = " + m.getIsReaderDel() +""+m.getIsSenderDel());
-
-        }
-
-
-    }
 
     private static Connection openDB(){
         Connection connection = null;

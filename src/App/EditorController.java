@@ -10,122 +10,94 @@
  */
 package App;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextArea;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.TextFlow;
-import javafx.util.Callback;
-
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import java.util.ArrayList;
 
 public class EditorController extends Parent implements Initializable{
 
-    @FXML
-    Button send;
-    @FXML
-    Button close;
-    @FXML
-    VBox vbox ;
-    @FXML
-    TextField toAccount;
-    @FXML
-    TextField fromAccount;
-    @FXML
-    TextField subject;
-    @FXML
-    TextArea body;
-    @FXML
-    GridPane gridPane;
-    @FXML
-    GridPane gridPane2;
-    @FXML
-    HBox fromBox;
-    @FXML
-    HBox toBox;
-    @FXML
-    HBox subjectBox;
-    @FXML
-    Label toText;
-    @FXML
-    Label fromText;
-    @FXML
-    Label subjectText;
-    @FXML
-    Label error;
 
-    /**
-     *  The member variables.
-     */
+    @FXML
+    /** Text field for typing to Account */
+    private TextField toAccount;
+    @FXML
+    /** Text field for typing from Account */
+    private TextField fromAccount;
+    @FXML
+    /** Text field for typing subject */
+    private TextField subject;
+    @FXML
+    /** Text area for typing body */
+    private TextArea body;
+    @FXML
+    /** Grid pane for main window */
+    private GridPane gridPane;
+    @FXML
+    /** Grid pane for main scene */
+    private GridPane gridPaneScene;
+    @FXML
+    /** A frame of from account */
+    private HBox fromBox;
+    @FXML
+    /** A frame of to account */
+    private HBox toBox;
+    @FXML
+    /** A frame of subject */
+    private HBox subjectBox;
+    @FXML
+    /** Label of error */
+    private Label error;
+
+    /** This window application */
     private SceneManager application;
 
+    /** User's account */
     private Account account;
 
+    /** Account manager */
     private AccountManager accountManager;
 
+    /** Email message */
     private EmailMessage msg;
 
+    /** Operation order */
     private int order = 0;
 
+    /** Email messages */
     ArrayList<EmailMessage> multiEmail = new ArrayList<>();
 
-
+    /** setter method for window application */
     public void setWindow(SceneManager application)
     {
         this.application = application ;
     }
     @Override
+    /** An override method to initial this window */
     public void initialize(URL location, ResourceBundle resources) {
 
-        gridPane2.prefHeightProperty().bind(gridPane.heightProperty());
-        gridPane2.prefWidthProperty().bind(gridPane.widthProperty());
-        body.prefHeightProperty().bind(gridPane2.heightProperty().subtract(107));
-        body.prefWidthProperty().bind(gridPane2.widthProperty().subtract(2));
+        gridPaneScene.prefHeightProperty().bind(gridPane.heightProperty());
+        gridPaneScene.prefWidthProperty().bind(gridPane.widthProperty());
+        body.prefHeightProperty().bind(gridPaneScene.heightProperty().subtract(107));
+        body.prefWidthProperty().bind(gridPaneScene.widthProperty().subtract(2));
 
         toAccount.prefWidthProperty().bind(toBox.widthProperty().subtract(57));
         fromAccount.prefWidthProperty().bind(fromBox.widthProperty().subtract(57));
         subject.prefWidthProperty().bind(subjectBox.widthProperty().subtract(57));
-        error.prefWidthProperty().bind(gridPane2.widthProperty().subtract(164));
+        error.prefWidthProperty().bind(gridPaneScene.widthProperty().subtract(164));
         error.setText("");
 
     }
-
-    public void goDashboardView(ActionEvent event){
+    /**
+     *  Method that redirects to dashboard view
+     */
+    public void goDashboardView(){
 
         application.dashboardView();
     }
@@ -133,11 +105,11 @@ public class EditorController extends Parent implements Initializable{
     /**
      * Send emailMessage have 3 main method New message, Reply message and forward message
      */
-    public void sendMessage(ActionEvent event){
+    public void sendMessage(){
 
-        int checkEmail=1;
+        int checkEmail=1; /* boolean for validate to email */
 
-        /**
+        /*
          * If order > 1 it mean this program will do reply or forward
          * before send new email it will write old message
          */
@@ -177,32 +149,32 @@ public class EditorController extends Parent implements Initializable{
             }
         }
 
-        String allContact = toAccount.getText();
-        String fields[] = allContact.split(",");
+        String allContact = toAccount.getText();       /* every to email address */
+        String fields[] = allContact.split(",");  /* each to email address */
 
-        String a;
+        String text;                                    /* text in text field */
 
         multiEmail.clear();
 
-        /**
+        /*
         * Check variable before send an email
-        * */
-        a=toAccount.getText();
-        if(a.trim().isEmpty())
+        */
+        text=toAccount.getText();
+        if(text.trim().isEmpty())
         {
             toAccount.setStyle("-fx-border-color:#f44336;");
             error.setText("ERROR!! Miss ToAccount");
             checkEmail=0;
         }
-        a=subject.getText();
-        if(a.trim().isEmpty())
+        text=subject.getText();
+        if(text.trim().isEmpty())
         {
             subject.setStyle("-fx-border-color:#f44336;");
             error.setText("ERROR!! Miss subject");
             checkEmail=0;
         }
-        a=body.getText();
-        if(a.trim().isEmpty())
+        text=body.getText();
+        if(text.trim().isEmpty())
         {
             body.setStyle("-fx-border-color:#f44336;");
             error.setText("ERROR!! Miss body");
@@ -236,6 +208,7 @@ public class EditorController extends Parent implements Initializable{
 
     /**
      *  Get accountManager from changed SceneManager for set setAccountManager.
+     *  @param accountManager A manager of account
      */
     public void setAccountManager(AccountManager accountManager)
     {
@@ -244,6 +217,7 @@ public class EditorController extends Parent implements Initializable{
 
     /**
      *  Get account from changed SceneManager for set setAccount.
+     *  @param account user's account
      */
     public void setAccount(Account account)
     {
@@ -253,6 +227,7 @@ public class EditorController extends Parent implements Initializable{
 
     /**
      *  Get account from Dashboard for set setMsg for do reply or forward method.
+     *  @param msg email message
      */
     public void setMsg(EmailMessage msg)
     {
@@ -261,6 +236,7 @@ public class EditorController extends Parent implements Initializable{
 
     /**
      *  Get account from Dashboard for set setOrder for do confirm user's action.
+     *  @param order order of operation
      */
     public void setOrder(int order)
     {
@@ -269,6 +245,7 @@ public class EditorController extends Parent implements Initializable{
 
     /**
      *  Get toAccountEmail from Dashboard for set toAccount for confirm toEmail in reply method.
+     *  @param toAccount to account email address
      */
     public void setToAccount(String toAccount)
     {

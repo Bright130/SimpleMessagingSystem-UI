@@ -26,38 +26,16 @@ import javafx.scene.control.TextArea;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.text.TextFlow;
 import javafx.util.Callback;
-
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+
 public class DashboardController extends Parent implements Initializable {
     @FXML
     Tab all;
@@ -343,9 +321,6 @@ public class DashboardController extends Parent implements Initializable {
             application.dashboardView();
         }
     }
-
-    // TODO: 11/20/2017 Event close immediately
-
 
     public void goLogoutView(ActionEvent event){
 
