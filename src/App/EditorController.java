@@ -71,7 +71,7 @@ public class EditorController extends Parent implements Initializable{
     private int order = 0;
 
     /** Email messages */
-    ArrayList<EmailMessage> multiEmail = new ArrayList<>();
+    private ArrayList<EmailMessage> multiEmail = new ArrayList<>();
 
     /** setter method for window application */
     public void setWindow(SceneManager application)
