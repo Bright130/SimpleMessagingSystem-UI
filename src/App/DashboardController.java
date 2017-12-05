@@ -118,13 +118,39 @@ public class DashboardController extends Parent implements Initializable {
         {
             if(myAccount.getEmail().equals(m.getFromEmail())&&m.getFromEmail().equals(m.getToEmail()))
             {
-                subjectDetail="";
-                unReadMsg.add(m);
-                subjectDetail+="Send : "+m.getToEmail();
-                subjectDetail+="\n"+m.getSubject();
-                subjectDetail+="\n"+m.getLastModified();
-                subUnreadMsg.add(subjectDetail);
-                subAllMsg.add(subjectDetail);
+                if(m.getIsRead()==0)
+                {
+                    subjectDetail="";
+                    unReadMsg.add(m);
+                    subjectDetail+="(*)From : "+m.getToEmail();
+                    subjectDetail+="\n"+m.getSubject();
+                    subjectDetail+="\n"+m.getLastModified();
+                    subUnreadMsg.add(subjectDetail);
+                    subAllMsg.add(subjectDetail);
+                }
+                else if(m.getIsRead()==1)
+                {
+                    if(m.getIsReaderDel()==1)
+                    {
+                        subjectDetail="";
+                        sentMsg.add(m);
+                        subjectDetail+="Send : "+m.getToEmail();
+                        subjectDetail+="\n"+m.getSubject();
+                        subjectDetail+="\n"+m.getLastModified();
+                        subSentMsg.add(subjectDetail);
+                        subAllMsg.add(subjectDetail);
+                    }
+                    else if(m.getIsSenderDel()==1)
+                    {
+                        subjectDetail="";
+                        readMsg.add(m);
+                        subjectDetail+="From : "+m.getToEmail();
+                        subjectDetail+="\n"+m.getSubject();
+                        subjectDetail+="\n"+m.getLastModified();
+                        subReadMsg.add(subjectDetail);
+                        subAllMsg.add(subjectDetail);
+                    }
+                }
             }
             else if(m.getIsRead()==0&&myAccount.getEmail().equals(m.getToEmail()))
             {
