@@ -116,6 +116,7 @@ public class DashboardController extends Parent implements Initializable {
     private void fetchEmail()
     {
         myAccount = SceneManager.getAccount();
+        myAccount.setLastUpdate();
         allMsg = DBConnection.getMessage(myAccount);
         readMsg = new ArrayList<>();
         unReadMsg = new ArrayList<>();
