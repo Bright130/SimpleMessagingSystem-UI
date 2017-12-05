@@ -153,23 +153,7 @@ public class SceneManager extends Application
         dashboardView();
         return true;
     }
-    /**
-     * A method that check the signup and existing email
-     * @param username is username of user
-     * @return  status of checking, true means email isn't exist
-     */
-    public boolean checkSignUp(String username)
-    {
-        account = DBConnection.getAccount(username);
-        if(account==null)
-        {
 
-            return true ;
-
-        }
-        else
-            return false;
-    }
     /**
      * A method that change the scene
      * @param filename file of FXML which is scene that need to load
@@ -185,10 +169,12 @@ public class SceneManager extends Application
         loader.setLocation(getClass().getResource(path));
         if(pane!=null)
             root.getChildren().removeAll(pane);
-        System.out.println("path = " + path);
-        try{
+        try
+        {
             pane = loader.load(file);
-        } finally {
+        }
+        finally
+        {
             file.close();
         }
 

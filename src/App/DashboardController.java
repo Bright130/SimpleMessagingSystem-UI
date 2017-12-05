@@ -215,7 +215,7 @@ public class DashboardController extends Parent implements Initializable
         scrollPane.prefWidthProperty().bind(gridPane.heightProperty().subtract(0));
         detailPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(0));
         generateEmailList(allList,subAllMsg,allMsg);
-        generateEmailListUnread(unreadList,subUnreadMsg,unReadMsg);
+        generateEmailList(unreadList,subUnreadMsg,unReadMsg);
         generateEmailList(readList,subReadMsg,readMsg);
         generateEmailList(sentList,subSentMsg,sentMsg);
         unread.setText("Unread("+subUnreadMsg.size()+")");
@@ -223,7 +223,7 @@ public class DashboardController extends Parent implements Initializable
         read.setText("Read("+subReadMsg.size()+")");
         sent.setText("Sent("+subSentMsg.size()+")");
     }
-
+    
     /**
      *  Generate the list of email
      *  @param listView list view id name in FXML
@@ -231,40 +231,6 @@ public class DashboardController extends Parent implements Initializable
      *  @param msg messages in the category
      * */
     private void generateEmailList( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg )
-    {
-        ObservableList<String> data = FXCollections.observableArrayList(subMsg);  /* header messages */
-        listView.getSelectionModel();
-        listView.setItems(data);
-        listView.setCellFactory(new Callback<ListView<String>,
-                                        ListCell<String>>()
-                                {
-                                    @Override
-                                    public ListCell<String> call(ListView<String> list)
-                                    {
-                                        return new EmailCardCell();
-                                    }
-                                }
-        );
-
-        listView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>()
-                {
-                    public void changed(ObservableValue<? extends String> ov,
-                                        String old_val, String new_val)
-                    {
-                        currentMsg = msg.get(listView.getSelectionModel().getSelectedIndex());
-                        detailPane.setText(getDetailMessage(currentMsg));
-                    }
-                });
-
-    }
-    /**
-     *  Generate the list of email only unread category and once email was read, it's also update read status
-     *  @param listView list view id name in FXML
-     *  @param subMsg header messages
-     *  @param msg messages in the category
-     * */
-    private void generateEmailListUnread( ListView<String> listView,ArrayList<String> subMsg,ArrayList<EmailMessage> msg )
     {
         ObservableList<String> data = FXCollections.observableArrayList(subMsg);
         listView.getSelectionModel();

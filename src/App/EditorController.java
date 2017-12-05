@@ -76,6 +76,8 @@ public class EditorController extends Parent implements Initializable{
     /** Email messages */
     private ArrayList<EmailMessage> multiEmail = new ArrayList<>();
 
+    private String errorText="" ;
+
     /** setter method for window application */
     public void setWindow(SceneManager application)
     {
@@ -105,6 +107,17 @@ public class EditorController extends Parent implements Initializable{
 
         application.dashboardView();
     }
+    private void setTextError(String text)
+    {
+        if(errorText.isEmpty())
+        {
+            errorText="ERROR!! : "+text;
+        }
+        else
+        {
+            errorText+=", "+text;
+        }
+    }
 
     /**
      * Send emailMessage have 3 main method New message, Reply message and forward message
@@ -114,8 +127,8 @@ public class EditorController extends Parent implements Initializable{
         int checkEmail=1; /* boolean for validate to email */
         String allContact = toAccount.getText();       /* every to email address */
         String fields[] = allContact.split(",");  /* each to email address */
-
         String text;                                    /* text in text field */
+        errorText = "";
 
         EmailMessage msg;
         multiEmail.clear();
@@ -124,10 +137,10 @@ public class EditorController extends Parent implements Initializable{
         * Check variable before send an email
         */
         text=toAccount.getText();
-        if(text.trim().isEmpty())
+        if(!IOUtils.checkEmail(text))
         {
             toAccount.setStyle("-fx-border-color:#f44336;");
-            error.setText("ERROR!! Miss ToAccount");
+            setTextError("Invalid to address");
             checkEmail=0;
         }
         else
@@ -138,7 +151,7 @@ public class EditorController extends Parent implements Initializable{
         if(text.trim().isEmpty())
         {
             subject.setStyle("-fx-border-color:#f44336;");
-            error.setText("ERROR!! Miss subject");
+            setTextError("Subject can't be empty");
             checkEmail=0;
         }
         else
@@ -149,13 +162,14 @@ public class EditorController extends Parent implements Initializable{
         if(text.trim().isEmpty())
         {
             body.setStyle("-fx-border-color:#f44336;");
-            error.setText("ERROR!! Miss body");
+            setTextError("Body can't be empty");
             checkEmail=0;
         }
         else
         {
             body.setStyle("-fx-border-color:none;");
         }
+
         if(checkEmail==1)
         {
             for(String contact: fields)
@@ -163,7 +177,7 @@ public class EditorController extends Parent implements Initializable{
                 if(!accountManager.checkEmail(contact))
                 {
                     toAccount.setStyle("-fx-border-color:#f44336;");
-                    error.setText("ERROR!! Miss contact => '"+contact+"' !!");
+                    setTextError("Invalid contact => '"+contact+"'");
                     checkEmail=0;
                     break;
                 }
@@ -191,6 +205,7 @@ public class EditorController extends Parent implements Initializable{
             }
             application.dashboardView();
         }
+        error.setText(errorText);
     }
 
     /**

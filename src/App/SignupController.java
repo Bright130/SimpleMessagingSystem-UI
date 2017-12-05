@@ -65,7 +65,8 @@ public class SignupController extends Parent implements Initializable
         {
             if(IOUtils.checkPassword(pass))
             {
-                if(!application.checkSignUp(email))
+
+                if(AccountManager.checkEmail(email))
                 {
                     notice.setStyle("-fx-text-fill:#f44336;");
                     notice.setText("This email is already used");
@@ -74,9 +75,7 @@ public class SignupController extends Parent implements Initializable
                 {
                     notice.setStyle("-fx-text-fill:#00E676;");
                     notice.setText("Sign Up Success!!");
-                    account = new Account(email,pass,IOUtils.getDateTime());
-                    DBConnection.createAccount(account);
-                    application.loginView();
+                    AccountManager.createAccount(email,pass) ;
                 }
             }
             else

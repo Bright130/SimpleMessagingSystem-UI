@@ -45,15 +45,21 @@ public class AccountManager
      * @param   email      String of email
      * @return if the program can find an account it will return true but return false
      */
-    public boolean checkEmail(String email)
+    public static boolean checkEmail(String email)
     {
         Account temp;
         temp = DBConnection.getAccount(email);
+
         if(temp!=null)
         {
             return true;
         }
         return false;
+    }
+
+    public static boolean createAccount(String email,String pass)
+    {
+        return DBConnection.createAccount(new Account(email,pass,IOUtils.getDateTime()));
     }
 
 }
