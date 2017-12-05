@@ -17,12 +17,14 @@ import java.lang.String;
 
 public class Account
 {
+    /** email of account */
     private String email;
-
+    /** password of account */
     private String password;
-
+    /** time of last refreshed of account */
     private String lastRefresh;
 
+    /** Constructor method*/
     Account()
     {
         this.email = null;

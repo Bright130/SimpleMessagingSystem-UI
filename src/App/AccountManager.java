@@ -55,13 +55,5 @@ public class AccountManager
         }
         return false;
     }
-    // TODO: 20/11/2017 Logout
-//
-//    public boolean logout(String email, Date upDateTime)
-//    {
-//
-//    }
 
 }
-
-

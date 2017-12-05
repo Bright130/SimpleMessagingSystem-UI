@@ -28,7 +28,7 @@ public class IOUtils
         Pattern p = Pattern.compile("^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$");
         Matcher m = p.matcher(email); /* string that match the pattern */
 
-        if (!m.find())
+        if (!m.find()||email.trim().isEmpty())
         {
             System.out.println("Email not valid!!");
             return false;

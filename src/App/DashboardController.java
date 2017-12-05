@@ -22,20 +22,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.control.TextArea;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import javafx.util.Callback;
+
 public class DashboardController extends Parent implements Initializable {
+    /** Group of tabs in each category */
     @FXML
     Tab all;
     @FXML
@@ -44,6 +41,7 @@ public class DashboardController extends Parent implements Initializable {
     Tab read;
     @FXML
     Tab sent;
+    /** Group of list view in each category */
     @FXML
     ListView<String> allList = new ListView<>();
     @FXML
@@ -53,32 +51,22 @@ public class DashboardController extends Parent implements Initializable {
     @FXML
     ListView<String> sentList = new ListView<>();
     @FXML
-    Button refresh;
-    @FXML
-    Button newMessage;
-    @FXML
-    Button reply;
-    @FXML
-    Button forward;
-    @FXML
-    Button logout;
-    @FXML
+    /** Display detail of email pane */
     TextArea detailPane;
     @FXML
+    /** Split pane */
     SplitPane splitPane;
     @FXML
+    /** Grid pane for main program */
     GridPane gridPane;
     @FXML
-    GridPane gridPane2;
-    @FXML
+    /** Scroll pane that contain detail in email */
     ScrollPane scrollPane;
     @FXML
+    /** right box that contains many button */
     VBox rightBox;
-
-
     /** This window application */
     private SceneManager application;
-
     /**
      *  The Group of variables that store message in each categories
      */
@@ -89,9 +77,6 @@ public class DashboardController extends Parent implements Initializable {
     private ArrayList<EmailMessage> unReadMsg;
 
     private ArrayList<EmailMessage> sentMsg;
-
-
-
     /**
      *  The Group of variables that store subtitle of messages in each categories
      */
@@ -104,7 +89,7 @@ public class DashboardController extends Parent implements Initializable {
     private ArrayList<String> subUnreadMsg = new ArrayList<>();
 
     /** User's account */
-    private Account myAccount;
+    protected Account myAccount;
 
     /** Current message that user views */
     private EmailMessage currentMsg;
@@ -117,7 +102,7 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     /**
-     *  Connect the email from database after that filter them and separate to correct type
+     *  Connect the email from database after that filter them and separate to correct category
      */
     private void fetchEmail()
     {
@@ -255,7 +240,7 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     /**
-     *  Send email that want to reply and order for reply method
+     *  Send email that want to reply and order for reply method and go to editor
      */
     public void goReplyView(){
 
@@ -266,7 +251,7 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     /**
-     *  Send email that want to forward and order for forward method
+     *  Send email that want to forward and order for forward method and go to editor
      */
     public void goForwardView(){
 
@@ -277,7 +262,7 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     /**
-     *  Send order for NewMessage method
+     *  Send order for NewMessage method and go to editor
      */
     public void goNewMessageView(){
 
@@ -286,7 +271,7 @@ public class DashboardController extends Parent implements Initializable {
     }
 
     /**
-     *  Delete the current email that user select
+     *  Delete the current email that user select and refresh
      */
     public void deleteMessage(){
 

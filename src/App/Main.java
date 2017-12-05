@@ -17,21 +17,38 @@ import javafx.stage.Stage;
 import java.io.File;
 
 
-public class Main extends SceneManager {
+public class Main extends SceneManager
+{
+
+    /** primary stage of the program */
+    private static Stage primaryStage ;
+
+    /**
+     *  add sub-fix to the title bar
+     *  @param text a sub-fix text
+     */
+    public static void addMoreTitleText(String text)
+    {
+        primaryStage.setTitle("BJ Simple Messaging"+text);
+    }
+
 
     @Override
     /** An override method that use to start the program
      *  @param primary stage the main state of program */
-    public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("BJ Simple Messaging");
-        primaryStage.setScene(new Scene(createWindow(),750, 420));
-        primaryStage.getIcons().add(new Image(File.separator+"IMG"+File.separator+"icon.png"));
-        primaryStage.show();
+    public void start(Stage primaryStage) throws Exception
+    {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("BJ Simple Messaging");
+        this.primaryStage.setScene(new Scene(createWindow(),750, 420));
+        this.primaryStage.getIcons().add(new Image(File.separator+"IMG"+File.separator+"icon.png"));
+        this.primaryStage.show();
     }
 
 
     /** main method */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

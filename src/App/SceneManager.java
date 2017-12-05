@@ -1,13 +1,3 @@
-/**
- *    SceneManager
- *       A class that manage the scene of this program
- *
- *   Created by Chainarong Tumapha (Bright)  58070503409 AND
- *              Paween Surimittragool (Jarb) 58070503457
- *
- *       Group BJ
- *       24 Oct. 2017
- */
 package App;
 
 import javafx.application.Application;
@@ -26,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SceneManager extends Application{
-    /** Declear the interface method */
+    /* Declear the interface method */
     public void start(Stage primaryStage) throws Exception {}
     /** Stack pane to contain every pane */
     private StackPane root =new StackPane();
@@ -41,8 +31,8 @@ public class SceneManager extends Application{
     public void loginView()
     {
         try{
+            Main.addMoreTitleText("");
             LoginController login = (LoginController) changeScene("Login.fxml") ;
-
             login.setWindow(this);
 
         }catch (Exception e)
@@ -54,20 +44,14 @@ public class SceneManager extends Application{
     /** A method that invoke the Logout scene */
     public void logoutView()
     {
-        try{
-            LoginController login = (LoginController) changeScene("Login.fxml") ;
-            login.setWindow(this);
-
-        }catch (Exception e)
-        {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-        }
+        loginView();
 
     }
     /** A method that invoke the Signup scene */
     public void signupView()
     {
         try{
+            Main.addMoreTitleText("");
             SignupController signup = (SignupController) changeScene("Signup.fxml") ;
             signup.setWindow(this);
 
@@ -82,19 +66,19 @@ public class SceneManager extends Application{
     public void editorView(EmailMessage msg,int order)
     {
         try{
-            EditorController ecitor = (EditorController) changeScene("Editor.fxml") ;
-            ecitor.setAccountManager(manager);
-            ecitor.setAccount(account);
-            ecitor.setOrder(order);
+            EditorController editor = (EditorController) changeScene("Editor.fxml") ;
+            editor.setAccountManager(manager);
+            editor.setAccount(account);
+            editor.setOrder(order);
             if(order>1)
             {
-                ecitor.setMsg(msg);
+                editor.setMsg(msg);
                 if(order==2)
                 {
-                    ecitor.setToAccount(msg.getFromEmail());
+                    editor.setToAccount(msg.getFromEmail());
                 }
             }
-            ecitor.setWindow(this);
+            editor.setWindow(this);
 
         }catch (Exception e)
         {
@@ -108,7 +92,9 @@ public class SceneManager extends Application{
     public void dashboardView()
     {
         try{
+            Main.addMoreTitleText(" : Hello! "+account.getEmail());
             DashboardController dashboard = (DashboardController) changeScene("Dashboard.fxml") ;
+
             dashboard.setWindow(this);
 
         }catch (Exception e)
@@ -171,7 +157,7 @@ public class SceneManager extends Application{
      */
     public Initializable changeScene(String filename) throws Exception{
 
-        String path = ".."+ File.separator+"FXML"+ File.separator+filename ;  /* file path */
+        String path = ".."+ File.separator+"FXML"+ File.separator+filename ;
         InputStream file = getClass().getResourceAsStream(path);
         FXMLLoader loader = new FXMLLoader();
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -189,7 +175,7 @@ public class SceneManager extends Application{
         return (Initializable) loader.getController();
 
     }
-    /** An account getter method */
+/** An account getter method */
     public static Account getAccount()
     {
         return account;
