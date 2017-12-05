@@ -87,7 +87,6 @@ public class SceneManager extends Application
         {
             EditorController editor = (EditorController) changeScene("Editor.fxml") ;
             Main.setMinWindow(400,240);
-            editor.setAccountManager(manager);
             editor.setAccount(account);
 
             if(order>1)

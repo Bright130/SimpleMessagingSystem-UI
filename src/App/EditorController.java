@@ -77,9 +77,6 @@ public class EditorController extends Parent implements Initializable
     /** User's account */
     private Account account;
 
-    /** Account manager */
-    private AccountManager accountManager;
-
     /** Email message */
     private EmailMessage msg;
 
@@ -159,7 +156,7 @@ public class EditorController extends Parent implements Initializable
         * Check variable before send an email
         */
         text=toAccount.getText();
-        if(!IOUtils.checkEmail(text))
+        if(text.trim().isEmpty())
         {
             toAccount.setStyle("-fx-border-color:#f44336;");
             setTextError("Invalid to address");
@@ -196,12 +193,14 @@ public class EditorController extends Parent implements Initializable
         {
             for(String contact: fields)
             {
-                if(!accountManager.checkEmail(contact))
+                if(!AccountManager.checkEmail(contact))
                 {
                     toAccount.setStyle("-fx-border-color:#f44336;");
-                    setTextError("Invalid contact => '"+contact+"'");
+                    if(checkEmail==1)
+                        setTextError("Invalid email '"+contact+"'");
+                    else
+                        setTextError("'"+contact+"'");
                     checkEmail=0;
-                    break;
                 }
 
                 if(contact.equals(account.getEmail()))
@@ -228,15 +227,6 @@ public class EditorController extends Parent implements Initializable
             application.dashboardView();
         }
         error.setText(errorText);
-    }
-
-    /**
-     *  Get accountManager from changed SceneManager for set setAccountManager.
-     *  @param accountManager A manager of account
-     */
-    public void setAccountManager(AccountManager accountManager)
-    {
-        this.accountManager = accountManager;
     }
 
     /**
