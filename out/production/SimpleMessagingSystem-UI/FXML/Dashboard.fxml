@@ -148,7 +148,7 @@
                               </HBox>
                               <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="5060.0" prefWidth="439.0">
                                  <content>
-                                    <TextArea fx:id="detailPane" editable="false" prefHeight="471.0" prefWidth="437.0" text="jsrjdhgj/n/nsdfdddd\n\njsrjdhgj/n/nsdfdddd\n\njsrjdhgj/n/nsdfdddd\n\njsrjdhgj/n/nsdfdddd\n\njsrjdhgj/n/nsdfdddd\n\ndsfdfsf" />
+                                    <TextArea fx:id="detailPane" editable="false" prefHeight="471.0" prefWidth="437.0" />
                                  </content>
                               </ScrollPane>
                            </children>

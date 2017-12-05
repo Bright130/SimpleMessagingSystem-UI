@@ -27,7 +27,7 @@ public class AccountManager
      */
     public Account login(String email,String password)
     {
-        Account temp;
+        Account temp=null;
         temp = DBConnection.getAccount(email);
         if(temp!=null)
         {
@@ -67,5 +67,12 @@ public class AccountManager
     {
         return DBConnection.createAccount(new Account(email,pass,IOUtils.getDateTime()));
     }
+
+    /** logout method */
+    public void logout()
+    {
+        account = null;
+    }
+
 
 }

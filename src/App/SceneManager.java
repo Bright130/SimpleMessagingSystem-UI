@@ -52,6 +52,8 @@ public class SceneManager extends Application
     /** A method that invoke the Logout scene */
     public void logoutView()
     {
+        account = null;
+        manager.logout();
         loginView();
 
     }

@@ -108,7 +108,7 @@ public class DashboardController extends Parent implements Initializable
     private ArrayList<String> subUnreadMsg = new ArrayList<>();
 
     /** User's account */
-    protected Account myAccount;
+    private Account myAccount;
 
     /** Current message that user views */
     private EmailMessage currentMsg;
@@ -216,7 +216,6 @@ public class DashboardController extends Parent implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         fetchEmail();
-        detailPane.setText("                                        HELLO "+myAccount.getEmail());
         splitPane.prefHeightProperty().bind(gridPane.heightProperty());
         splitPane.prefWidthProperty().bind(gridPane.widthProperty());
         detailPane.prefWidthProperty().bind(gridPane.heightProperty().subtract(30));
